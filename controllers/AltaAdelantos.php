@@ -18,7 +18,7 @@ if (count($_POST) > 0) {
 
     $ma->crearAdelantoFechaDeterminada($_POST['empleado'], $_POST['monto'], $_POST['fecha']);
 
-    header('location: ../controllers/ListaAdelantos.php');
+    header('location: ../controllers/AltaAdelantos.php');
 } else {
     $v = new altaadelanto();    // este llama a la vista de alta de adelantos.
     $v->empleados = $m->getTodos();

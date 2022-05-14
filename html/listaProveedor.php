@@ -28,7 +28,7 @@
                         <td><?= htmlentities($p['nombre']) ?></td>
                         <td><?= htmlentities($p['razon_social']) ?></td>
                         <td>
-                            <button class="btn-eliminar"><a href="../controllers/Eliminar-Proveedor.php?id=<?= htmlentities($p['codigo_proveedor']) ?>">ELIMINAR </a></button>
+                            <button class="btn-eliminar"><a href="../controllers/EliminarProveedor.php?id=<?= htmlentities($p['codigo_proveedor']) ?>">ELIMINAR </a></button>
                             <a href="#modificacion-producto"><button onclick="mostrarModificarProducto()" class="btn-modificar"> MODIFICAR </button></a>
                         </td>
                     </tr>

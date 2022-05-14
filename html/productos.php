@@ -29,7 +29,7 @@
                     <td><?= htmlentities($p['precio_costo']) ?></td>
                     <td><?= htmlentities($p['stock']) ?></td>
                     <td>
-                        <button class="btn-eliminar"><a href='../controllers/Eliminar-Producto.php?id=<?= htmlentities($p['codigo_producto']) ?> '>ELIMINAR </a></button>
+                        <button class="btn-eliminar"><a href='../controllers/EliminarProducto.php?id=<?= htmlentities($p['codigo_producto']) ?> '>ELIMINAR </a></button>
                         <a href="#modificacion-producto"><button onclick="mostrarModificarProducto()" class="btn-modificar"> MODIFICAR </button></a>
                     </td>
                 <?php } ?>

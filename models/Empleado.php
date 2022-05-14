@@ -4,8 +4,6 @@
 
 class Empleado extends model
 {
-
-
     public function getTodos()
     {
         $this->db->query("SELECT * 
@@ -37,12 +35,9 @@ class Empleado extends model
 
     public function NuevoEmpleado($nombre, $apellido, $dni)
     {
-
-
         if (!is_numeric($dni)) throw new ValidacionException1('error 1');
 
         if ($dni < 1) throw new ValidacionException1('error 2');
-        //if($dni > 9) die("error 3");
 
         if (!isset($nombre)) throw new ValidacionException1('error 3');
         if (strlen($nombre) < 1) throw new ValidacionException1('error 4');
@@ -94,7 +89,7 @@ class Empleado extends model
 							set nombre = '$nombre',
 								apellido = '$apellido',
 								dni 	= $dni
-							WHERE codigo_empleado = $id");
+							WHERE codigo_empleado = $id ");
     }
 }
 

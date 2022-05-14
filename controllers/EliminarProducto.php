@@ -13,5 +13,5 @@ if (!empty($_GET['id'])) {
     $id_produ = $_GET['id'];
     $p->EliminarProducto($id_produ);
 
-    header('location: ../controllers/CrMdRProductos.php');
+    header('location: ../controllers/Productos.php');
 }

@@ -3,11 +3,11 @@
 // controllers/EstadisticaYear.php
 
 require '../fw/fw.php';
-require '../views/estaditicaanio.php';
+require '../views/estadisticasAnio.php';
 require '../models/Venta.php';
 require '../html/partials/session.php';
 
-$e = new EstadisticasAnio;
+$e = new estadisticasAnio;
 $v = new Venta;
 
 if (isset($_POST['anio'])) {

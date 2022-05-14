@@ -32,7 +32,7 @@
                     <td><?= htmlentities($e['apellido']) ?></td>
                     <td><?= htmlentities($e['dni']) ?></td>
                     <td>
-                        <button class="btn-eliminar"><a href="../controllers/Eliminar-Empleado.php?id=<?= htmlentities($e['codigo_empleado']) ?>">ELIMINAR </a></button>
+                        <button class="btn-eliminar"><a href="../controllers/EliminarEmpleado.php?id=<?= htmlentities($e['codigo_empleado']) ?>">ELIMINAR </a></button>
                         <a href="#modificacion-producto"><button onclick="mostrarModificarProducto()" class="btn-modificar"> MODIFICAR </button></a>
                     </td>
                 <?php } ?>

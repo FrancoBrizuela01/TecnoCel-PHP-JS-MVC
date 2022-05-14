@@ -4,21 +4,21 @@
 
 require '../fw/fw.php';
 require '../models/Empleado.php';
-require '../views/empleados.php';
+require '../views/listadoEmpleados.php';
 require '../html/partials/session.php';
 
 
 $e = new Empleado();
 
 if (isset($_POST['cancelar'])) {
-    header('Location: ../controllers/CrMdREmpleados.php');
+    header('Location: ../controllers/Empleados.php');
 }
 
 if (isset($_POST['Modificar'])) {
-
     $e->ModificarEmpleado($_POST['nombre'], $_POST['apellido'], $_POST['dni'], $_POST['id']);
-    header('Location: ../controllers/CrMdREmpleados.php');
+    header('Location: ../controllers/Empleados.php');
 }
+
 
 if (isset($_POST['nuevo'])) {
 
@@ -28,9 +28,9 @@ if (isset($_POST['nuevo'])) {
 
 
     $e->NuevoEmpleado($_POST['nombre'], $_POST['apellido'], $_POST['dni']);
-    header('location: ../controllers/CrMdREmpleados.php');
+    header('location: ../controllers/Empleados.php');
 } else {
-    $v = new empleados();
+    $v = new listadoEmpleados();
     $v->empleados = $e->getTodos();
 }
 

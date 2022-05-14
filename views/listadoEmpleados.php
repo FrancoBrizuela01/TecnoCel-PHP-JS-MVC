@@ -2,8 +2,7 @@
 
 //views/empleados.php
 
-class empleados extends view
+class listadoEmpleados extends view
 {
-
     public $empleados;
 }

@@ -8,7 +8,7 @@ require '../models/Producto.php';
 require '../views/ventas.php';
 require '../html/partials/session.php';
 
-$ven = new venta();
+$ven = new Venta();
 $p = new Producto();
 
 if (count($_POST) > 0) {
@@ -16,7 +16,7 @@ if (count($_POST) > 0) {
     $ven->AgregarVenta($_POST['fecha'], $_POST['total']);
     $p->VentaRealizada($_POST['codigo'], $_POST['cantidad']);
 
-    header('location: ../controllers/CrRVentas.php');
+    header('location: ../controllers/Ventas.php');
 } else {
     $v = new ventas();
     $v->vendido = $ven->GetVentas();

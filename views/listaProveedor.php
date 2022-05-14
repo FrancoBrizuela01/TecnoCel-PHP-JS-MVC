@@ -2,8 +2,7 @@
 
 // ../views/proveedor.php
 
-class proveedor extends view
+class listaProveedor extends view
 {
-
     public $proveedores;
 }

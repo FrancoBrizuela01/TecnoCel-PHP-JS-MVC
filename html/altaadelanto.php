@@ -15,7 +15,7 @@
         ?>
 
         <div class="Divcontainer" id="Divcontainer">
-            <a href="../controllers/ListaAdelantos.php"><button class="btn-newEmpleado" id="btn-newEmpleado" onclick="">VER LISTA DE ADELANTOS</button></a>
+            <a href="../controllers/Adelantos.php"><button class="btn-newEmpleado" id="btn-newEmpleado" onclick="">VER LISTA DE ADELANTOS</button></a>
             <h2>AGREAGAR ADELANTO:</h2>
             <form action="" method="post">
                 <table>

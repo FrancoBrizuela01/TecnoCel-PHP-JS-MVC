@@ -16,5 +16,5 @@ if (!empty($_GET['id'])) {
     $e->EliminarEmpleado($id_emple);
     $a->EliminarAdelanto($id_emple);
 
-    header('location: ../controllers/CrMdREmpleados.php');
+    header('location: ../controllers/Empleados.php');
 }
