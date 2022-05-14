@@ -1,0 +1,484 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+:root {
+    --third-color: #e9f4fb;
+    --btn-modificar: #1ecd97;
+    --btn-eliminar: #dd0d0d;
+    --color-primario: #30323D;
+    --color-secundario: #E8C547;
+    --color-terciario: #4D5061
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background-color: var(--color-primario);
+}
+
+/*---------- custom scroll bar----------*/
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-secundario);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--third-color);
+    border-radius: 10px;
+}
+
+::selection {
+    background: var(--color-secundario);
+}
+
+/*---------navbar---------*/
+.content {
+    max-width: 1250px;
+    margin: auto;
+    padding: 0 30px;
+}
+
+.navbar {
+    position: sticky;
+    width: 100%;
+    z-index: 2;
+    padding: 25px 0;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid var(--color-secundario);
+}
+
+.navbar .sticky {
+    background: #1b1b1b;
+    padding: 10px 0;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .logo a {
+    color: var(--third-color);
+    font-size: 30px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.navbar .menu-list {
+    display: inline-flex;
+}
+
+.menu-list li {
+    list-style: none;
+    background: none;
+}
+
+.menu-list li a {
+    color: var(--third-color);
+    background: none;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.menu-list a:hover {
+    color: var(--color-secundario);
+    border-bottom: 1px solid var(--color-secundario);
+    transition: 0.5s;
+}
+
+.icon {
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
+}
+
+.menu-list .cancel-btn {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+}
+
+.container {
+    max-width: 500px;
+    width: 90%;
+    margin: 40px auto;
+}
+
+/*----------txt home----------*/
+.content {
+    width: 100%;
+}
+
+.txt-home {
+    align-items: center;
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    color: var(--third-color);
+    margin-top: 10%;
+}
+
+.img-home {
+    padding-top: 10px;
+    padding-left: 3px;
+    margin-left: -105px;
+    position: relative;
+    float: left;
+    width: 45%;
+    height: auto;
+}
+
+.txt {
+    text-align: left;
+    padding-top: 40px;
+    font-size: 26px;
+    color: var(--color-secundario);
+}
+
+.blink {
+    animation-name: parpadeo;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+    -webkit-animation-name: parpadeo;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+}
+
+@-moz-keyframes parpadeo {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes parpadeo {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes parpadeo {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/*----------footer----------*/
+
+.footer p {
+    color: #8e8e8e;
+    background-color: #3f3d56;
+    padding: 30px;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 40%;
+    bottom: 0;
+}
+
+.footer a {
+    background: none;
+    color: #8e8e8e;
+}
+
+.footer a:hover {
+    color: #f5f5f5;
+}
+
+/*select*/
+
+.divSelect {
+    position: initial;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.divSelect select {
+    background-color: var(--third-color);
+    width: 10%;
+    height: 50px;
+    border: none;
+}
+
+.divSelect select:hover {
+    background-color: var(--color-secundario);
+    color: white;
+    cursor: pointer;
+}
+
+.select {
+    margin-right: 10px;
+}
+
+/*----------table----------*/
+
+.Divcontainer {
+    margin: 9rem;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 1rem;
+    width: 84%;
+    text-align: center;
+}
+
+.Divcontainer h2 {
+    color: var(--third-color);
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #CDD1C4;
+    box-shadow: 0 15px 25px rgb(0 0 0 / 60%);
+}
+
+th {
+    border-bottom: 10px solid var(--color-primario);
+}
+
+thead th:nth-child(1) {
+    width: 30%;
+}
+
+thead th:nth-child(2) {
+    width: 20%;
+}
+
+thead th:nth-child(3) {
+    width: 15%;
+}
+
+thead th:nth-child(4) {
+    width: 35%;
+}
+
+th,
+td {
+    padding: 20px;
+}
+
+/*/*----------buttons----------*/
+
+a {
+    color: red;
+}
+
+a:hover {
+    color: white;
+}
+
+.btn-search {
+    outline: none;
+    text-align: center;
+    width: 10%;
+    background: var(--color-primario);
+    border: 2px solid var(--color-secundario);
+    color: var(--color-secundario);
+    text-shadow: 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-right: 10px;
+}
+
+.btn-search:hover {
+    color: white;
+    background: var(--color-secundario);
+}
+
+.btn-search:active {
+    letter-spacing: 1px;
+}
+
+.btn-stats {
+    margin-top: 30px;
+    margin-left: 35%;
+    transform: translateX(-50%);
+    outline: none;
+    height: 40px;
+    text-align: center;
+    width: 30%;
+    border-radius: 40px;
+    background: var(--color-primario);
+    border: 2px solid var(--color-secundario);
+    color: var(--color-secundario);
+    text-shadow: 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-right: 10px;
+}
+
+.btn-stats:hover {
+    color: white;
+    background: var(--color-secundario);
+}
+
+.btn-stats:active {
+    letter-spacing: 1px;
+}
+
+.btn-modificar {
+    outline: none;
+    height: 34px;
+    text-align: center;
+    width: 100px;
+    border-radius: 40px;
+    background: #fff;
+    border: 2px solid var(--btn-modificar);
+    color: var(--btn-modificar);
+    text-shadow: 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-right: 10px;
+}
+
+.btn-modificar:hover {
+    color: white;
+    background: var(--btn-modificar);
+}
+
+.btn-modificar:active {
+    letter-spacing: 1px;
+}
+
+.btn-eliminar {
+    outline: none;
+    height: 34px;
+    text-align: center;
+    width: 100px;
+    border-radius: 40px;
+    background: #fff;
+    border: 2px solid var(--btn-eliminar);
+    color: var(--btn-eliminar);
+    text-shadow: 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-eliminar:hover {
+    color: white;
+    background: var(--btn-eliminar);
+}
+
+.btn-eliminar:hover a {
+    color: white;
+}
+
+.btn-eliminar:active {
+    letter-spacing: 1px;
+}
+
+.btn-newEmpleado {
+    display: block;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    outline: none;
+    height: 40px;
+    text-align: center;
+    width: 10%;
+    border-radius: 40px;
+    background: var(--color-primario);
+    border: 2px solid var(--color-secundario);
+    color: var(--color-secundario);
+    text-shadow: 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-right: 10px;
+    margin-bottom: 40px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn-newEmpleado:hover {
+    color: white;
+    background: var(--color-secundario);
+}
+
+.btn-newEmpleado:active {
+    letter-spacing: 1px;
+}
+
+/*----------modificacion de empleados----------*/
+
+.mod-empleados {
+    display: none;
+    margin: 9rem;
+    padding: 1rem;
+    width: 84%;
+    text-align: center;
+}
+
+.mod-empleados h2 {
+    color: var(--third-color);
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+/* #product-list{
+    display: none;
+} */
+
+.h2Initial {
+    text-align: initial !important;
+}
+
+.nav li ul {
+    display: none;
+    position: absolute;
+    min-width: 140px;
+}
+
+.nav li:hover>ul {
+    display: inline-block;
+}
+
+.nav li ul li {
+    position: relative;
+}
+
+.nav li ul li ul {
+    right: -140px;
+    top: 0px;
+}
