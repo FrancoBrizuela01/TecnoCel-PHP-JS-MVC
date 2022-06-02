@@ -23,6 +23,10 @@
                     <th>NOMBRE</th>
                     <th>APELLIDO</th>
                     <th>DNI</th>
+                    <th>SUELDO</th>
+                    <th>DIRECCION</th>
+                    <th>ALTURA</th>
+                    <th>TELEFONO</th>
                     <th>ACCIONES</th>
                 </tr>
                 <tr>
@@ -31,6 +35,11 @@
                     <td><?= htmlentities($e['nombre']) ?></td>
                     <td><?= htmlentities($e['apellido']) ?></td>
                     <td><?= htmlentities($e['dni']) ?></td>
+                    <td><?= htmlentities($e['sueldo']) ?></td>
+                    <td><?= htmlentities($e['direccion']) ?></td>
+                    <td><?= htmlentities($e['altura']) ?></td>
+                     <td><?= htmlentities($e['telefono']) ?></td>
+
                     <td>
                         <button class="btn-eliminar"><a href="../controllers/EliminarEmpleado.php?id=<?= htmlentities($e['codigo_empleado']) ?>">ELIMINAR </a></button>
                         <a href="#modificacion-producto"><button onclick="mostrarModificarProducto()" class="btn-modificar"> MODIFICAR </button></a>
@@ -51,12 +60,20 @@
                         <th>NOMBRE</th>
                         <th>APELLIDO</th>
                         <th>DNI</th>
+                        <th>SUELDO</th>
+                        <th>DIRECCION</th>
+                        <th>ALTURA</th>
+                        <th>TELEFONO</th>
                         <th>ACCIONES</th>
                     </tr>
                     <tr>
                         <td><input type="text" name="nombre" id="nombre" maxlenght="20" value=""></td>
                         <td><input type="text" name="apellido" id="apellido" value=""></td>
                         <td><input type="number" name="dni" id="dni" value=""></td>
+                        <td><input type="number" name="sueldo" id="sueldo" value=""></td>
+                        <td><input type="text" name="direccion" id="direccion" value=""></td>
+                        <td><input type="number" name="altura" id="altura" value=""></td>
+                        <td><input type="number" name="telefono" id="telefono" value=""></td>
                         <td>
                             <button type="submit" class="btn-modificar" name="nuevo" value="nuevo">CONFIRMAR</button>
                             <a href="#Divcontainer"><button type="submit" name="cancelar" value="Cancelar" class="btn-eliminar" onclick="ocultarModificarEmpleados()">CANCELAR</button></a>
@@ -75,6 +92,10 @@
                         <th>NUEVO NOMBRE</th>
                         <th>NUEVO APELLIDO</th>
                         <th>NUEVO DNI</th>
+                        <th>NUEVO SUELDO</th>
+                        <th>NUEVA DIRECCION</th>
+                        <th>NUEVA ALTURA</th>
+                        <th>NUEVO TELEFONO</th>
                         <th>ACCIONES</th>
                     </tr>
                     <tr>
@@ -88,6 +109,10 @@
                         <td><input type="text" name="nombre" id="nombre" value=""></td>
                         <td><input type="text" name="apellido" id="apellido" value=""></td>
                         <td><input type="number" name="dni" id="dni" value=""></td>
+                        <td><input type="number" name="sueldo" id="sueldo" value=""></td>
+                        <td><input type="text" name="direccion" id="direccion" value=""></td>
+                        <td><input type="number" name="altura" id="altura" value=""></td>
+                        <td><input type="number" name="telefono" id="telefono" value=""></td>
                         <td id="">
                             <a><button type="submit" name="Modificar" value="Modificar" class="btn-modificar">GUARDAR</button></a>
                             <a href="#Divcontainer"><button type="submit" name="cancelar" value="Cancelar" class="btn-eliminar" onclick="ocultarModificarEmpleados()">CANCELAR</button></a>

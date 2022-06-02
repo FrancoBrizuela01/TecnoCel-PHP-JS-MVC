@@ -33,10 +33,9 @@ class Empleado extends model
         return true;
     }
 
-    public function NuevoEmpleado($nombre, $apellido, $dni)
+    public function NuevoEmpleado($nombre, $apellido, $dni, $sueldo, $direccion, $altura, $telefono)
     {
         if (!is_numeric($dni)) throw new ValidacionException1('error 1');
-
         if ($dni < 1) throw new ValidacionException1('error 2');
 
         if (!isset($nombre)) throw new ValidacionException1('error 3');
@@ -49,10 +48,24 @@ class Empleado extends model
         if (strlen($apellido) > 20) throw new ValidacionException1('error 8');
         $apellido = $this->db->escape($apellido);
 
+        if (!is_numeric($sueldo)) throw new ValidacionException1('error 9');
+        if ($sueldo < 1) throw new ValidacionException1('error 10');
+
+        if (!isset($direccion)) throw new ValidacionException1('error 11');
+        if (strlen($direccion) < 1) throw new ValidacionException1('error 12');
+        if (strlen($direccion) > 20) throw new ValidacionException1('error 13');
+        $direccion = $this->db->escape($direccion);
+
+        if (!is_numeric($altura)) throw new ValidacionException1('error 14');
+        if ($altura < 1) throw new ValidacionException1('error 15');
+
+        if (!is_numeric($telefono)) throw new ValidacionException1('error 16');
+        if ($telefono < 1) throw new ValidacionException1('error 17');
+
 
         $this->db->query("INSERT INTO empleados
-        				(nombre, apellido, dni) VALUES
-        				('$nombre', '$apellido', $dni)");
+        				(nombre, apellido, dni, sueldo, direccion, altura, telefono) VALUES
+        				('$nombre', '$apellido', '$dni', '$sueldo', '$direccion', '$altura', '$telefono')");
     }
 
     public function EliminarEmpleado($id)
@@ -66,7 +79,7 @@ class Empleado extends model
 							WHERE codigo_empleado = $id ");
     }
 
-    public function ModificarEmpleado($nombre, $apellido, $dni, $id)
+    public function ModificarEmpleado($nombre, $apellido, $dni, $sueldo, $direccion, $altura, $telefono, $id)
     {
 
         if (!isset($nombre)) throw new ValidacionException1('error 1');
@@ -82,13 +95,31 @@ class Empleado extends model
         if (!is_numeric($dni)) throw new ValidacionException1('error 7');
         if (!ctype_digit($dni))  throw new ValidacionException1('error 8');
 
-        if (!is_numeric($id)) throw new ValidacionException1('error 9');
-        if (!ctype_digit($id))  throw new ValidacionException1('error 10');
+        if (!is_numeric($sueldo)) throw new ValidacionException1('error 9');
+        if (!ctype_digit($sueldo))  throw new ValidacionException1('error 10');
+
+        if (!isset($direccion)) throw new ValidacionException1('error 11');
+        if (strlen($direccion) < 1) throw new ValidacionException1('error 12');
+        if (strlen($direccion) > 20) throw new ValidacionException1('error 13');
+        $direccion = $this->db->escape($direccion);
+
+        if (!is_numeric($altura)) throw new ValidacionException1('error 14');
+        if (!ctype_digit($altura))  throw new ValidacionException1('error 15');
+
+        if (!is_numeric($telefono)) throw new ValidacionException1('error 16');
+        if (!ctype_digit($telefono))  throw new ValidacionException1('error 17');
+
+        if (!is_numeric($id)) throw new ValidacionException1('error 18');
+        if (!ctype_digit($id))  throw new ValidacionException1('error 19');
 
         $this->db->query("UPDATE empleados
 							set nombre = '$nombre',
 								apellido = '$apellido',
-								dni 	= $dni
+								dni 	= $dni,
+                                sueldo = $sueldo,
+                                direccion = '$direccion',
+                                altura = $altura,
+                                telefono = $telefono
 							WHERE codigo_empleado = $id ");
     }
 }

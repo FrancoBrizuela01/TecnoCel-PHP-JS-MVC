@@ -19,7 +19,7 @@ class Database
 
     private function connect()
     {
-        $this->cn = mysqli_connect("localhost", "root", "", "san pedro");
+        $this->cn = mysqli_connect("localhost", "root", "", "tecnocel");
         $this->cn->set_charset('utf8');
     }
 
