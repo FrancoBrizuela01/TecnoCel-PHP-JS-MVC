@@ -16,7 +16,7 @@ class Venta extends model
         return $this->db->fetchAll();
     }
 
-    public function AgregarVenta($fecha, $cantidad)
+    public function AgregarVenta($fecha, $cantidad, $codigo)
     {
 
         if (strlen($cantidad) < 1) throw new ValidacionException5('error 1');
@@ -44,8 +44,8 @@ class Venta extends model
         $fecha = "$anio-$mes-$dia";
 
         $this->db->query("INSERT INTO codigo_venta
-								(fecha, cantidad) VALUES
-								('$fecha', $cantidad)	");
+								(codigo_producto, fecha, cantidad) VALUES
+								($codigo, '$fecha', $cantidad)	");
     }
 
     public function totalMes($mes, $anio)

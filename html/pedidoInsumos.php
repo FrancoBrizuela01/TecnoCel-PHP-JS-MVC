@@ -19,13 +19,13 @@
             <table>
                 <tr>
                     <th>PRODUCTO</th>
-                    <th>STOCK</th>
+                    <th>CANTIDAD</th>
                     <th>ACCIONES</th>
                 </tr>
                 <tr>
                     <td>
                         <select id="codigo" name="codigo">
-                            <?php foreach ($this->insu as $a) {  ?>
+                            <?php foreach ($this->insumos as $a) {  ?>
                                 <option value="<?= htmlentities($a['codigo_producto']) ?>"><?= htmlentities($a['descripcion']) ?></option>
                             <?php } ?>
                         </select>

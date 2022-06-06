@@ -17,7 +17,6 @@
             <table>
                 <tr>
                     <th>FECHA</th>
-                    <th>TOTAL</th>
                     <th>PRODUCTO</th>
                     <th>CANTIDAD</th>
                     <th>ACCIONES</th>
@@ -25,7 +24,6 @@
                 <tr>
                 <tr>
                     <td><input type="date" name="fecha" id="fecha" value=""></td>
-                    <td><input type="number" name="total" id="total" value=""></td>
                     <td>
                         <select id="codigo" name="codigo">
                             <?php foreach ($this->productos as $p) {  ?>

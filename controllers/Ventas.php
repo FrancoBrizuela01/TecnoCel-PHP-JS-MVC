@@ -13,7 +13,7 @@ $p = new Producto();
 
 if (count($_POST) > 0) {
 
-    $ven->AgregarVenta($_POST['fecha'], $_POST['total']);
+    $ven->AgregarVenta($_POST['fecha'], $_POST['cantidad'], $_POST['codigo']);
     $p->VentaRealizada($_POST['codigo'], $_POST['cantidad']);
 
     header('location: ../controllers/Ventas.php');
