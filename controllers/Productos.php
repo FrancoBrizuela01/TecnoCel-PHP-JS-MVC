@@ -17,17 +17,14 @@ if (isset($_POST['cancelar'])) {
 
 if (isset($_POST['Modificar'])) {
 
-    $p->ModificarProducto($_POST['descripcion'], $_POST['precio_costo'], $_POST['proveedor'],                          $_POST['stock'], $_POST['id']);
+    $p->ModificarProducto($_POST['precio_costo'], $_POST['precio_venta'], $_POST['id']);
     header('Location: ../controllers/Productos.php');
 }
 
 if (count($_POST) > 0) {
 
-    if (!isset($_POST['nombre'])) die('Escribir el nombre');
-    if (!isset($_POST['desc'])) die('Escribir descripcion');
-    if (!isset($_POST['precio'])) die('Escribir el precio');
 
-    $p->NuevoProducto($_POST['desc'], $_POST['precio'], $_POST['nombre'], $_POST['stock']);
+    $p->NuevoProducto($_POST['desc'], $_POST['precio_costo'], $_POST['precio_venta'], $_POST['stock']);
 
     header('location: ../controllers/Productos.php');
 } else {

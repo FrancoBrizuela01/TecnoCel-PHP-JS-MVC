@@ -17,7 +17,6 @@
             <table>
                 <tr>
                     <th>FECHA</th>
-                    <th>TOTAL</th>
                     <th>PRODUCTO</th>
                     <th>CANTIDAD</th>
                     <th>ACCIONES</th>
@@ -25,7 +24,6 @@
                 <tr>
                 <tr>
                     <td><input type="date" name="fecha" id="fecha" value=""></td>
-                    <td><input type="number" name="total" id="total" value=""></td>
                     <td>
                         <select id="codigo" name="codigo">
                             <?php foreach ($this->productos as $p) {  ?>
@@ -46,12 +44,16 @@
         <table>
             <tr>
                 <th>FECHA</th>
+                <th>DESCRIPCION</th>
+                <th>CANTIDAD</th>
                 <th>TOTAL</th>
             </tr>
             <?php foreach ($this->vendido as $v) { ?>
                 <tr>
                     <td><?= htmlentities($v['fecha']) ?></td>
+                    <td><?= htmlentities($v['descripcion']) ?></td>
                     <td><?= htmlentities($v['cantidad']) ?></td>
+                    <td><?= htmlentities($v['total']) ?></td>
                 </tr>
             <?php } ?>
         </table>

@@ -14,7 +14,8 @@ class Producto extends model
         return $this->db->fetchAll();
     }
 
-    public function NuevoProducto($desc, $precio, $nombre, $stock)
+
+    public function NuevoProducto($desc, $precio_costo, $precio_venta, $stock)
     {
 
         if (!isset($desc)) throw new ValidacionException('error 1');
@@ -22,21 +23,18 @@ class Producto extends model
         if (strlen($desc) > 20) throw new ValidacionException('error 3');
         $desc = $this->db->escape($desc);
 
-        if (!isset($nombre)) throw new ValidacionException('error 4');
-        if (strlen($nombre) < 1) throw new ValidacionException('error 5');
-        if (strlen($nombre) > 20) throw new ValidacionException('error 6');
-        $nombre = $this->db->escape($nombre);
+        if (!is_numeric($precio_costo)) throw new ValidacionException1('error 4');
+        if (!ctype_digit($precio_costo))  throw new ValidacionException1('error 5');
 
-        if (strlen($precio) < 1) throw new ValidacionException('error 7');
-        if (strlen($precio) > 40) throw new ValidacionException('error 8');
-        $precio = $this->db->escape($precio);
+        if (!is_numeric($precio_venta)) throw new ValidacionException1('error 6');
+        if (!ctype_digit($precio_venta))  throw new ValidacionException1('error 7');
 
-        if (!is_numeric($stock)) throw new ValidacionException1('error 9');
-        if (!ctype_digit($stock))  throw new ValidacionException1('error 10');
+        if (!is_numeric($stock)) throw new ValidacionException1('error 8');
+        if (!ctype_digit($stock))  throw new ValidacionException1('error 9');
 
         $this->db->query("INSERT INTO productos
-								(descripcion, precio_costo, nombre_prove, stock) VALUES
-								('$desc', $precio, '$nombre', $stock )");
+								(descripcion, precio_costo, precio_venta, stock) VALUES
+								('$desc', $precio_costo, '$precio_venta', $stock )");
     }
 
     public function EliminarProducto($id)
@@ -50,34 +48,21 @@ class Producto extends model
 								WHERE codigo_producto = $id ");
     }
 
-    public function ModificarProducto($desc, $precio, $prove, $stock, $id)
+    public function ModificarProducto($precio_costo, $precio_venta, $id)
     {
-        if (strlen($precio) < 1) throw new ValidacionException1('error 1');
-        if (strlen($precio) > 40) throw new ValidacionException1('error 2');
-        $precio = $this->db->escape($precio);
+        if (!is_numeric($precio_costo)) throw new ValidacionException1('error 11');
+        if (!ctype_digit($precio_costo))  throw new ValidacionException1('error 12');
 
-        if (!isset($prove)) throw new ValidacionException1('error 3');
-        if (strlen($prove) < 1) throw new ValidacionException1('error 4');
-        if (strlen($prove) > 20) throw new ValidacionException1('error 5');
-        $prove = $this->db->escape($prove);
-
-        if (strlen($stock) < 1) throw new ValidacionException1('error 6');
-        if (strlen($stock) > 40) throw new ValidacionException1('error 7');
-        $stock = $this->db->escape($stock);
-
-        if (!isset($desc)) throw new ValidacionException1('error 8');
-        if (strlen($desc) < 1) throw new ValidacionException1('error 9');
-        if (strlen($desc) > 20) throw new ValidacionException1('error 10');
-        $desc = $this->db->escape($desc);
+        if (!is_numeric($precio_venta)) throw new ValidacionException1('error 11');
+        if (!ctype_digit($precio_venta))  throw new ValidacionException1('error 12');
 
         if (!is_numeric($id)) throw new ValidacionException1('error 11');
         if (!ctype_digit($id))  throw new ValidacionException1('error 12');
 
+
         $this->db->query("UPDATE productos
-								set descripcion = '$desc',
-									precio_costo = $precio,
-									nombre_prove = '$prove',
-									stock = $stock
+								set	precio_costo = $precio_costo,
+									precio_venta = $precio_venta
 								WHERE codigo_producto = $id");
     }
 
@@ -107,6 +92,33 @@ class Producto extends model
         $this->db->query("UPDATE productos
 								set stock = stock + $stock
 								WHERE codigo_producto = $id	");
+
+        $this->db->query("INSERT INTO compra_producto
+                            (codigo_producto, cantidad) VALUES 
+                            ($id, $stock)");
+    }
+
+    public function CantidadStock($id, $cantidad){
+
+        if (!is_numeric($id)) throw new ValidacionException1('error 1');
+        if (!ctype_digit($id))  throw new ValidacionException1('error 2');
+
+        $this->db->query ("SELECT stock
+                            FROM productos
+                            WHERE codigo_producto = $id and 
+                                    stock > $cantidad");
+        
+        if ($this->db->numRows() != 1) return false;
+
+        return true;
+    }
+
+    public function getCompras()
+    {
+        $this->db->query("SELECT p.descripcion, c.cantidad, c.cantidad * p.precio_costo as total
+                            FROM compra_producto c
+                            LEFT JOIN productos p ON p.codigo_producto = c.codigo_producto ");
+        return $this->db->fetchAll();
     }
 }
 
