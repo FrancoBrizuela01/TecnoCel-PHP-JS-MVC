@@ -15,15 +15,13 @@ if (isset($_POST['cancelar'])) {
     header('Location: ../controllers/Productos.php');
 }
 
-if (isset($_POST['Modificar'])) {
+// if (isset($_POST['Modificar'])) {
 
-    $p->ModificarProducto($_POST['precio_costo'], $_POST['precio_venta'], $_POST['id']);
-    header('Location: ../controllers/Productos.php');
-}
+//     $p->ModificarProducto($_POST['precio_costo'], $_POST['precio_venta'], $_POST['id']);
+//     header('Location: ../controllers/Productos.php');
+// }
 
-if (count($_POST) > 0) {
-
-
+if (isset($_POST['nuevo'])) {
     $p->NuevoProducto($_POST['desc'], $_POST['precio_costo'], $_POST['precio_venta'], $_POST['stock']);
 
     header('location: ../controllers/Productos.php');

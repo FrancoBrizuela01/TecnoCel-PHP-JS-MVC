@@ -145,6 +145,8 @@ function btnModificarEmpleado(
   document.getElementById("mod-telefono").value = telefono;
 }
 
+//PROVEEDOR
+
 const urlEliminarProveedor = "../controllers/EliminarProveedor.php?id=";
 function btnEliminarProveedor(id) {
   Swal.fire({
@@ -240,6 +242,100 @@ function btnGuardarModificacionProveedor() {
 
 function btnCancelarModificacionProveedor() {
   const utlProveedor = "../controllers/Proveedor.php";
+  window.location = utlProveedor;
+}
+
+//PRODUCTO
+
+function btnEliminarProducto(id) {
+  const urlEliminarProducto = "../controllers/EliminarProducto.php?id=";
+  Swal.fire({
+    title: "¿Desea eliminar el producto?",
+    text: "¡No podrás revertir esto!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si, eliminar!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Eliminado!",
+        text: "",
+        icon: "success",
+        showConfirmButton: false,
+      });
+      setTimeout(() => {
+        window.location = urlEliminarProducto + id;
+      }, "1300");
+    }
+  });
+}
+
+function btnModificarProducto(
+  id,
+  descripcion,
+  precio_costo,
+  precio_venta,
+  stock
+) {
+  DivModiProducto.style.display = "block";
+  btnNewEmpleado.style.display = "none";
+
+  const lista_empleados = document.getElementById("lista_empleados");
+  lista_empleados.style.display = "none";
+
+  document.getElementById("id-producto").value = id;
+  document.getElementById("descripcion-producto").value = descripcion;
+  document.getElementById("precio_costo-producto").value = precio_costo;
+  document.getElementById("precio_venta-producto").value = precio_venta;
+  document.getElementById("stock-producto").value = stock;
+}
+
+function btnGuardarModificacionProducto() {
+  const urlProductos = "../controllers/Productos.php";
+  const formulario = document.getElementById("formulario_modificacionProducto");
+
+  formulario.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var datos = new FormData(formulario);
+
+    Swal.fire({
+      title: "¿Quieres guardar los cambios?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Guardar",
+      denyButtonText: `No guardar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Modificaciones hechas!",
+          icon: "success",
+          showConfirmButton: false,
+        });
+        fetch("../controllers/ModificarProducto.php", {
+          method: "post",
+          body: datos,
+        });
+        setTimeout(() => {
+          window.location = urlProductos;
+        }, "1300");
+      } else if (result.isDenied) {
+        Swal.fire({
+          title: "Los datos no se guardaran!",
+          icon: "info",
+          showConfirmButton: false,
+        });
+        setTimeout(() => {
+          window.location = urlProductos;
+        }, "1300");
+      }
+    });
+  });
+}
+
+function btnCancelarModificacionProducto() {
+  const utlProveedor = "../controllers/Productos.php";
   window.location = utlProveedor;
 }
 

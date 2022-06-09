@@ -88,7 +88,7 @@
             <h2>Modificar empleado</h2>
             <a href="#Divcontainer"><button name="Cancelar" value="Cancelar" class="btn-eliminar btn-cancelar-modificacion" id="btnCancelarModificar" onclick="btnCancelarModificacion()">CANCELAR</button></a>
             <form id="formulario_modificacion">
-                <input type=" text" name="id" id="mod-id" value="" class="inputId">
+                <input type="text" name="id" id="mod-id" value="" class="inputId">
                 <table>
                     <tr>
                         <th>NUEVO NOMBRE</th>

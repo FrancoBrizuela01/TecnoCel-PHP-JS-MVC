@@ -48,21 +48,23 @@ class Producto extends model
 								WHERE codigo_producto = $id ");
     }
 
-    public function ModificarProducto($precio_costo, $precio_venta, $id)
+    public function ModificarProducto($descripcion, $precio_costo, $precio_venta, $stock, $id)
     {
-        if (!is_numeric($precio_costo)) throw new ValidacionException1('error 11');
-        if (!ctype_digit($precio_costo))  throw new ValidacionException1('error 12');
+        if (!is_numeric($precio_costo)) throw new ValidacionException1('error 1');
+        if (!ctype_digit($precio_costo))  throw new ValidacionException1('error 2');
 
-        if (!is_numeric($precio_venta)) throw new ValidacionException1('error 11');
-        if (!ctype_digit($precio_venta))  throw new ValidacionException1('error 12');
+        if (!is_numeric($precio_venta)) throw new ValidacionException1('error 3');
+        if (!ctype_digit($precio_venta))  throw new ValidacionException1('error 4');
 
         if (!is_numeric($id)) throw new ValidacionException1('error 11');
         if (!ctype_digit($id))  throw new ValidacionException1('error 12');
 
 
         $this->db->query("UPDATE productos
-								set	precio_costo = $precio_costo,
-									precio_venta = $precio_venta
+								set	descripcion = '$descripcion',
+                                      precio_costo = $precio_costo,
+									  precio_venta = $precio_venta,
+                                      stock = $stock
 								WHERE codigo_producto = $id");
     }
 
@@ -98,16 +100,17 @@ class Producto extends model
                             ($id, $stock)");
     }
 
-    public function CantidadStock($id, $cantidad){
+    public function CantidadStock($id, $cantidad)
+    {
 
         if (!is_numeric($id)) throw new ValidacionException1('error 1');
         if (!ctype_digit($id))  throw new ValidacionException1('error 2');
 
-        $this->db->query ("SELECT stock
+        $this->db->query("SELECT stock
                             FROM productos
                             WHERE codigo_producto = $id and 
                                     stock > $cantidad");
-        
+
         if ($this->db->numRows() != 1) return false;
 
         return true;
