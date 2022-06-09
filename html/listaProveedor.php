@@ -14,7 +14,7 @@
         require '../html/partials/navBar.php';
         ?>
 
-        <div class="Divcontainer">
+        <div class="Divcontainer" id="lista_empleados">
             <a href="#new-empleado"><button class="btn-newEmpleado" id="btn-newEmpleado" onclick="mostrarAgregarEmpleado()">NUEVO PROVEEDOR</button></a>
             <h2>LISTA DE PROVEEDORES:</h2>
             <table>
@@ -36,8 +36,8 @@
                         <td><?= htmlentities($p['altura']) ?></td>
                         <td><?= htmlentities($p['telefono']) ?></td>
                         <td>
-                            <button class="btn-eliminar"><a href="../controllers/EliminarProveedor.php?id=<?= htmlentities($p['codigo_proveedor']) ?>">ELIMINAR </a></button>
-                            <a href="#modificacion-producto"><button onclick="mostrarModificarProducto()" class="btn-modificar"> MODIFICAR </button></a>
+                            <button class="btn-eliminar" onclick="btnEliminarProveedor(<?= $p['codigo_proveedor'] ?>)">ELIMINAR</button>
+                            <button class="btn-modificar" onclick="btnModificarProveedor(<?= $p['codigo_proveedor'] ?>, '<?= $p['nombre_empresa'] ?>', '<?= $p['razon_social'] ?>', <?= $p['cuit'] ?>, '<?= $p['direccion'] ?>', <?= $p['altura'] ?>, <?= $p['telefono'] ?>)">MODIFICAR</button>
                         </td>
                     </tr>
                 <?php  } ?>
@@ -78,10 +78,11 @@
 
         <div class="mod-empleados" id="modificacion-producto">
             <h2>Modificar proveedor</h2>
-            <form method="post">
+            <a href="#Divcontainer"><button name="Cancelar" value="Cancelar" class="btn-eliminar btn-cancelar-modificacion" id="btnCancelarModificar" onclick="btnCancelarModificacionProveedor()">CANCELAR</button></a>
+            <form id="formulario_modificacionProveedor">
+                <input type=" text" name="id" id="mod-id-proveedor" value="" class="inputId">
                 <table>
                     <tr>
-                        <th>SELECCIONE UN PROVEEDOR</th>
                         <th>Nombre Empresa</th>
                         <th>Razón Social</th>
                         <th>Cuit</th>
@@ -91,29 +92,24 @@
                         <th>ACCIONES</th>
                     </tr>
                     <tr>
-                        <td>
-                            <select id="id" name="id">
-                                <?php foreach ($this->proveedores as $p) { ?>
-                                    <option value="<?= htmlentities($p['codigo_proveedor']) ?>"><?= htmlentities($p['nombre_empresa']) ?></option>
-                                <?php  } ?>
-                            </select>
-                        </td>
-                        <td><input type="text" name="nombre_empresa" id="nombre_empresa" value=""></td>
-                        <td><input type="text" name="razon_social" id="razon_social" value=""></td>
-                        <td><input type="number" name="cuit" id="cuit" value=""></td>
-                        <td><input type="text" name="direccion" id="direccion" value=""></td>
-                        <td><input type="number" name="altura" id="altura" value=""></td>
-                        <td><input type="number" name="telefono" id="telefono" value=""></td>
-                        <td id="">
-                            <a><button type="submit" name="Modificar" value="Modificar" class="btn-modificar">GUARDAR</button></a>
-                            <a href="#Divcontainer"><button type="submit" name="cancelar" value="Cancelar" class="btn-eliminar" onclick="ocultarModificarEmpleados()">CANCELAR</button></a>
+                        <td><input type="text" name="nombre_empresa" id="nombre_empresa-mod" value=""></td>
+                        <td><input type="text" name="razon_social" id="razon_social-mod" value=""></td>
+                        <td><input type="number" name="cuit" id="cuit-mod" value=""></td>
+                        <td><input type="text" name="direccion" id="direccion-mod" value=""></td>
+                        <td><input type="number" name="altura" id="altura-mod" value=""></td>
+                        <td><input type="number" name="telefono" id="telefono-mod" value=""></td>
+                        <td class="tdAcciones">
+                            <button type="submit" class="btn-modificar" name="Modificar" value="Modificar" id="guardarModificar" onclick="btnGuardarModificacionProveedor()">GUARDAR</button>
                         </td>
                     </tr>
                 </table>
             </form>
         </div>
 
-        <script src="../html/js/app.js"></script>
+    </div>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../html/js/app.js"></script>
 </body>
 
 </html>

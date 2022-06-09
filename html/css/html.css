@@ -248,6 +248,14 @@ body {
     margin-right: 10px;
 }
 
+.tdAcciones{
+    padding-left: 38px;
+}
+
+.inputId{
+    display: none;
+}
+
 /*----------table----------*/
 
 .Divcontainer {
@@ -298,6 +306,10 @@ td {
     padding: 20px;
 }
 
+.lista_empleados{
+    display: block;
+}
+
 /*/*----------buttons----------*/
 
 a {
@@ -306,6 +318,10 @@ a {
 
 a:hover {
     color: white;
+}
+
+.btn-cancelar-modificacion{
+    margin-bottom: 10px;
 }
 
 .btn-search {
@@ -369,7 +385,12 @@ a:hover {
     text-shadow: 0;
     cursor: pointer;
     transition: all 0.25s ease;
-    margin-right: 10px;
+}
+
+.btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px;
 }
 
 .btn-modificar:hover {
@@ -453,7 +474,7 @@ a {
 .mod-empleados h2 {
     color: var(--third-color);
     text-align: center;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 }
 
 /* #product-list{

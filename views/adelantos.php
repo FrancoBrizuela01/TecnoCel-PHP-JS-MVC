@@ -4,6 +4,5 @@
 
 class adelantos extends view
 {
-
     public $empleados;
 }

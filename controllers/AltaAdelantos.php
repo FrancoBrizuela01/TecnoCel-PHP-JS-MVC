@@ -9,19 +9,28 @@ require '../views/altaadelanto.php';
 require '../html/partials/session.php';
 
 
-$m = new Empleado();
+// $m = new Empleado();
 
-if (count($_POST) > 0) {
+// if (count($_POST) > 0) {
 
-    $ma = new Adelantos();
-    if (!isset($_POST['fecha'])) die("Error validacion 1");
+//     $ma = new Adelantos();
+//     if (!isset($_POST['fecha'])) die("Error validacion 1");
 
-    $ma->crearAdelantoFechaDeterminada($_POST['empleado'], $_POST['monto'], $_POST['fecha']);
+//     $ma->crearAdelantoFechaDeterminada($_POST['empleado'], $_POST['monto'], $_POST['fecha']);
 
-    header('location: ../controllers/AltaAdelantos.php');
-} else {
-    $v = new altaadelanto();    // este llama a la vista de alta de adelantos.
-    $v->empleados = $m->getTodos();
-}
+//     header('location: ../controllers/AltaAdelantos.php');
+// } else {
+//     $v = new altaadelanto();    // este llama a la vista de alta de adelantos.
+//     $v->empleados = $m->getTodos();
+// }
+
+// $v->render();
+
+
+$e = new Empleado();
+
+$v = new altaadelanto();    // este llama a la vista de alta de adelantos.
+$v->empleados = $e->getTodos();
+
 
 $v->render();

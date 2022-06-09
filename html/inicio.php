@@ -21,7 +21,7 @@
     <?php
     require '../html/Partials/Footer.php';
     ?>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../html/js/app.js"></script>
 </body>
 

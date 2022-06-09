@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="../html/css/html.css">
 <link rel="stylesheet" href="../html/css/media.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<!-- <link rel="stylesheet" href="../plugins/SweetAlert/dist/sweetalert2.min.css"> -->
+<link rel="stylesheet" href="sweetalert2.min.css">
 
 <link rel="icon" type="image/png" sizes="192x192" href="../html/img/android-icon-192x192.png">
 <link rel="manifest" href="/manifest.json">

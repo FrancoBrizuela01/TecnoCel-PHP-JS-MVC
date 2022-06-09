@@ -81,7 +81,6 @@ class Empleado extends model
 
     public function ModificarEmpleado($nombre, $apellido, $dni, $sueldo, $direccion, $altura, $telefono, $id)
     {
-
         if (!isset($nombre)) throw new ValidacionException1('error 1');
         if (strlen($nombre) < 1) throw new ValidacionException1('error 2');
         if (strlen($nombre) > 20) throw new ValidacionException1('error 3');

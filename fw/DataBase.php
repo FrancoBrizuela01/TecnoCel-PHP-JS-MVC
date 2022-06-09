@@ -29,6 +29,7 @@ class Database
         if (!$this->cn) $this->connect();
         $this->res = mysqli_query($this->cn, $q);
         if (!$this->res) die(mysqli_error($this->cn) . "-- Consulta:" . $q);
+
     }
 
     public function numRows()

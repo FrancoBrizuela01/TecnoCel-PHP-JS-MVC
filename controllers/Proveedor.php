@@ -13,12 +13,12 @@ if (isset($_POST['cancelar'])) {
     header('Location: ../controllers/Proveedor.php');
 }
 
-if (isset($_POST['Modificar'])) {
+// if (isset($_POST['Modificar'])) {
 
-    $p->ModificarProveedor($_POST['nombre_empresa'], $_POST['razon_social'], $_POST['cuit'], 
-    	$_POST['direccion'], $_POST['altura'], $_POST['telefono'], $_POST['id']);
-    header('Location: ../controllers/Proveedor.php');
-}
+//     $p->ModificarProveedor($_POST['nombre_empresa'], $_POST['razon_social'], $_POST['cuit'], 
+//     	$_POST['direccion'], $_POST['altura'], $_POST['telefono'], $_POST['id']);
+//     header('Location: ../controllers/Proveedor.php');
+// }
 
 if (isset($_POST['nuevo'])) {
 

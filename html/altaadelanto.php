@@ -17,7 +17,7 @@
         <div class="Divcontainer" id="Divcontainer">
             <a href="../controllers/Adelantos.php"><button class="btn-newEmpleado" id="btn-newEmpleado" onclick="">VER LISTA DE ADELANTOS</button></a>
             <h2>AGREAGAR ADELANTO:</h2>
-            <form action="" method="post">
+            <form id="formulario_altaAdelanto">
                 <table>
                     <tr>
                         <th>SELECCIONE UN EMPLEADO</th>
@@ -34,20 +34,16 @@
                             </select>
                         </td>
                         <td><input type="date" name="fecha" id="fecha" value=""></td>
-                        <td><input type="number" name="monto" id="monto" value=""></td>
-                        <td><button type="submit" class="btn-modificar">CONFIRMAR</button>
+                        <td>$ <input type="number" name="monto" id="monto" value=""></td>
+                        <td><button type="submit" class="btn-modificar" onclick="confirmarAltaAdelanto()">CONFIRMAR</button>
                     </tr>
                     </tr>
                 </table>
             </form>
-
         </div>
-
-
-
     </div>
 
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../html/js/app.js"></script>
 </body>
 
