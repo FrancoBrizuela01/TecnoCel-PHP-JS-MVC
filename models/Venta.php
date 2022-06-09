@@ -10,8 +10,10 @@ class Venta extends model
     public function GetVentas()
     {
 
-        $this->db->query("SELECT *
-								FROM codigo_venta ");
+        $this->db->query("SELECT v.fecha, p.descripcion, v.cantidad, v.cantidad * p.precio_venta as total
+                            from codigo_venta v 
+                            left join productos p ON v.codigo_producto = p.codigo_producto
+                            ");
 
         return $this->db->fetchAll();
     }

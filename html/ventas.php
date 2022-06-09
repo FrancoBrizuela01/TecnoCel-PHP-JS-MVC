@@ -44,12 +44,16 @@
         <table>
             <tr>
                 <th>FECHA</th>
+                <th>DESCRIPCION</th>
+                <th>CANTIDAD</th>
                 <th>TOTAL</th>
             </tr>
             <?php foreach ($this->vendido as $v) { ?>
                 <tr>
                     <td><?= htmlentities($v['fecha']) ?></td>
+                    <td><?= htmlentities($v['descripcion']) ?></td>
                     <td><?= htmlentities($v['cantidad']) ?></td>
+                    <td><?= htmlentities($v['total']) ?></td>
                 </tr>
             <?php } ?>
         </table>

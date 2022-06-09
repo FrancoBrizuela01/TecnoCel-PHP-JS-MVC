@@ -14,6 +14,7 @@ class Producto extends model
         return $this->db->fetchAll();
     }
 
+
     public function NuevoProducto($desc, $precio_costo, $precio_venta, $stock)
     {
 
@@ -95,6 +96,29 @@ class Producto extends model
         $this->db->query("INSERT INTO compra_producto
                             (codigo_producto, cantidad) VALUES 
                             ($id, $stock)");
+    }
+
+    public function CantidadStock($id, $cantidad){
+
+        if (!is_numeric($id)) throw new ValidacionException1('error 1');
+        if (!ctype_digit($id))  throw new ValidacionException1('error 2');
+
+        $this->db->query ("SELECT stock
+                            FROM productos
+                            WHERE codigo_producto = $id and 
+                                    stock > $cantidad");
+        
+        if ($this->db->numRows() != 1) return false;
+
+        return true;
+    }
+
+    public function getCompras()
+    {
+        $this->db->query("SELECT p.descripcion, c.cantidad, c.cantidad * p.precio_costo as total
+                            FROM compra_producto c
+                            LEFT JOIN productos p ON p.codigo_producto = c.codigo_producto ");
+        return $this->db->fetchAll();
     }
 }
 

@@ -37,6 +37,24 @@
         </form>
     </div>
 
+   <div id="product-list" class="Divcontainer">
+        <h2 class="h2Initial">HISTORIAL DE COMPRAS:</h2>
+        <table>
+            <tr>
+                <th>DESCRIPCION</th>
+                <th>CANTIDAD</th>
+                <th>TOTAL</th>
+            </tr>
+            <?php foreach ($this->compras as $c) { ?>
+                <tr>
+                    <td><?= htmlentities($c['descripcion']) ?></td>
+                    <td><?= htmlentities($c['cantidad']) ?></td>
+                    <td><?= htmlentities($c['total']) ?></td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
+    
     <script src="../html/js/app.js"></script>
 </body>
 
