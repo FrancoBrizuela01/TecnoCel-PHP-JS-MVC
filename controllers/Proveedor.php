@@ -8,27 +8,38 @@ require '../views/listaProveedor.php';
 require '../html/partials/session.php';
 
 $p = new Proveedor();
+$c = new Proveedor();
+$t = new Proveedor();
 
 if (isset($_POST['cancelar'])) {
     header('Location: ../controllers/Proveedor.php');
 }
 
-// if (isset($_POST['Modificar'])) {
-
-//     $p->ModificarProveedor($_POST['nombre_empresa'], $_POST['razon_social'], $_POST['cuit'], 
-//     	$_POST['direccion'], $_POST['altura'], $_POST['telefono'], $_POST['id']);
-//     header('Location: ../controllers/Proveedor.php');
-// }
-
 if (isset($_POST['nuevo'])) {
 
-    if (!isset($_POST['nombre_empresa'])) die('Ingrese el nombre');
-    if (!isset($_POST['razon_social'])) die('Ingrese la razón social');
+	$a = $c->ExisteCuit($_POST['cuit']);
+	$b = $t->ExisteTelefonoProveedor($_POST['telefono']);
 
-    $p->NuevoProveedor($_POST['nombre_empresa'], $_POST['razon_social'], $_POST['cuit'], 
+	if($a){
+		if($b){
+ 		$p->NuevoProveedor($_POST['nombre_empresa'], $_POST['razon_social'], $_POST['cuit'], 
     	$_POST['direccion'], $_POST['altura'], $_POST['telefono']);
-
-    header('location: ../controllers/Proveedor.php');
+    	header('location: ../controllers/Proveedor.php');
+		}else {
+            echo '<script type="text/JavaScript"> 
+             alert("No se puede repetir el mismo TELEFONO para dos proveedores distintos");
+             </script>';
+           	$v = new listaProveedor();
+    		$v->proveedores = $p->GetProve();
+            }
+	}else {
+            echo '<script type="text/JavaScript"> 
+             alert("No se puede repetir el mismo CUIT para dos proveedores distintos");
+             </script>';
+            $v = new listaProveedor();
+    		$v->proveedores = $p->GetProve();
+            }
+   
 } else {
     $v = new listaProveedor();
     $v->proveedores = $p->GetProve();

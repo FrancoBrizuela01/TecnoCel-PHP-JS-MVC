@@ -36,7 +36,7 @@
                     <option value="12">Diciembre</option>
                 </select>
                 <select name="anio" class="select">
-                    <?php for ($i = 2021; $i < $anioActual + 10; $i++) { ?>
+                    <?php for ($i = 2022; $i < $anioActual + 9; $i++) { ?>
                         <option value="<?= $i ?>"><?= htmlentities($i) ?></option>
                     <?php } ?>
                 </select>
@@ -69,11 +69,14 @@
             <table>
                 <tr>
                     <th>TOTAL</th>
+                    <th>PROMEDIO</th>
                     <th>VENTA MINIMA</th>
                     <th>VENTA MAXIMA</th>
                 </tr>
                 <tr>
                     <td>$<?= htmlentities($this->totalMes['precio']) ?></td>
+
+                    <td>$<?= htmlentities($this->promedioDia['promedio']) ?></td>
 
                     <td><?= htmlentities($this->NombreDia($this->diaMin['fecha'])) ?>
                         $<?= htmlentities($this->diaMin['precio']) ?></td>

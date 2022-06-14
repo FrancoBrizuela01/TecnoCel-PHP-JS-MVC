@@ -22,7 +22,7 @@
         <form action="" method="post">
             <div class="divSelect">
                 <select name="anio" id="inputAño" class="select">
-                    <?php for ($anio = 2021; $anio < $anioActual + 10; $anio++) { ?>
+                    <?php for ($anio = 2022; $anio < $anioActual + 9; $anio++) { ?>
                         <option value="<?= $anio ?>"><?= htmlentities($anio) ?></option>
                     <?php } ?>
                 </select>

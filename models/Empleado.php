@@ -121,6 +121,33 @@ class Empleado extends model
                                 telefono = $telefono
 							WHERE codigo_empleado = $id ");
     }
+
+    public function ExisteDni($dni)
+    {
+        if (!is_numeric($dni)) throw new ValidacionException1('error 1');
+        if (!ctype_digit($dni))  throw new ValidacionException1('error 2');
+
+        $this->db->query("SELECT dni
+                            FROM empleados
+                            WHERE dni = $dni");
+
+        if ($this->db->numRows() != 1) return true;
+        return false;
+    }
+
+    public function ExisteTelefono($telefono)
+    {
+        if (!is_numeric($telefono)) throw new ValidacionException1('error 1');
+        if (!ctype_digit($telefono))  throw new ValidacionException1('error 2');
+
+        $this->db->query("SELECT telefono
+                            FROM empleados
+                            where telefono = $telefono");
+
+        if ($this->db->numRows() != 1) return true;
+        return false;
+
+    }
 }
 
 class ValidacionException1 extends Exception

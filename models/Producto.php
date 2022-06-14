@@ -112,7 +112,6 @@ class Producto extends model
                                     stock > $cantidad");
 
         if ($this->db->numRows() != 1) return false;
-
         return true;
     }
 
@@ -120,8 +119,23 @@ class Producto extends model
     {
         $this->db->query("SELECT p.descripcion, c.cantidad, c.cantidad * p.precio_costo as total
                             FROM compra_producto c
-                            LEFT JOIN productos p ON p.codigo_producto = c.codigo_producto ");
+                            LEFT JOIN productos p ON p.codigo_producto = c.codigo_producto
+                            ORDER BY codigo_compra desc
+                            LIMIT 10 ");
         return $this->db->fetchAll();
+    }
+
+    public function CambiarPrecioVenta ( $porciento ) 
+    {
+
+        $this->db->query ( "UPDATE productos
+                            SET    precio_venta = precio_venta + ( precio_venta * '$porciento' / 100 )");
+    }
+    public function CambiarPrecioCosto ( $porciento ) 
+    {
+
+        $this->db->query ( "UPDATE productos
+                            SET    precio_costo = precio_costo + ( precio_costo * '$porciento' / 100 )");
     }
 }
 

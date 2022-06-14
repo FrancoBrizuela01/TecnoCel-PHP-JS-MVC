@@ -9,42 +9,44 @@ require '../html/partials/session.php';
 
 
 $e = new Empleado();
+$dni = new Empleado();
+$telefono = new Empleado();
 
 if (isset($_POST['cancelar'])) {
     header('Location: ../controllers/Empleados.php');
 }
 
-
-// if (isset($_POST['Modificar'])) {
-//     $e->ModificarEmpleado(
-//         $_POST['nombre'],
-//         $_POST['apellido'],
-//         $_POST['dni'],
-//         $_POST['sueldo'],
-//         $_POST['direccion'],
-//         $_POST['altura'],
-//         $_POST['telefono'],
-//         $_POST['id']
-//     );
-//     // header('Location: ../controllers/Empleados.php');
-// }
-
-
 if (isset($_POST['nuevo'])) {
-    if (!isset($_POST['nombre'])) die('Escribir nombre');
-    if (!isset($_POST['apellido'])) die('Escribir apellido');
-    if (!isset($_POST['dni'])) die('Escribir dni');
 
-    $e->NuevoEmpleado(
+    $a = $dni->ExisteDni($_POST['dni']);
+    $b = $telefono->ExisteTelefono($_POST['telefono']);
+
+
+    if($a){
+        if($b){
+        $e->NuevoEmpleado(
         $_POST['nombre'],
         $_POST['apellido'],
         $_POST['dni'],
         $_POST['sueldo'],
         $_POST['direccion'],
         $_POST['altura'],
-        $_POST['telefono']
-    );
-    header('location: ../controllers/Empleados.php');
+        $_POST['telefono']);
+        header('location: ../controllers/Empleados.php');
+        } else {
+            echo '<script type="text/JavaScript"> 
+             alert("No se puede repetir el mismo TELEFONO para dos empleados distintos");
+             </script>';
+            $v = new listadoEmpleados();
+            $v->empleados = $e->getTodos();
+            }
+    }  else {
+    echo '<script type="text/JavaScript"> 
+     alert("No se puede repetir el mismo DNI para dos empleados distintos");
+     </script>';
+    $v = new listadoEmpleados();
+    $v->empleados = $e->getTodos();
+        }
 } else {
     $v = new listadoEmpleados();
     $v->empleados = $e->getTodos();

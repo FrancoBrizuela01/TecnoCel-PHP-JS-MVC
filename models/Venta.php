@@ -11,8 +11,10 @@ class Venta extends model
     {
 
         $this->db->query("SELECT v.fecha, p.descripcion, v.cantidad, v.cantidad * p.precio_venta as total
-                            from codigo_venta v 
-                            left join productos p ON v.codigo_producto = p.codigo_producto
+                            FROM codigo_venta v 
+                            LEFT JOIN productos p ON v.codigo_producto = p.codigo_producto
+                            ORDER by v.codigo_venta desc
+                            LIMIT 10
                             ");
 
         return $this->db->fetchAll();
@@ -63,10 +65,11 @@ class Venta extends model
         if (strlen($anio) != 4)  throw new ValidacionException5('error 6');
         if (!is_numeric($anio))  throw new ValidacionException5('error 7');
 
-        $this->db->query("SELECT SUM(cantidad) AS precio
-						    FROM   codigo_venta
-						    WHERE  MONTH (fecha) = '$mes' 
-						    AND    YEAR  (fecha) = '$anio'");
+        $this->db->query("SELECT SUM(c.cantidad * p.precio_venta) AS precio
+                            FROM   codigo_venta c 
+                            LEFT JOIN productos p ON p.codigo_producto = c.codigo_producto
+                            WHERE  MONTH (fecha) = '$mes' 
+                            AND    YEAR  (fecha) = '$anio'");
 
         return $this->db->fetch();
     }
@@ -86,13 +89,14 @@ class Venta extends model
         if (strlen($anio) != 4)  throw new ValidacionException5('error 6');
         if (!is_numeric($anio))  throw new ValidacionException5('error 7');;
 
-        $this->db->query("SELECT   codigo_venta , SUM(cantidad) precio , fecha 
-							FROM     codigo_venta
-							WHERE    MONTH (fecha) = '$mes'
-							AND      YEAR  (fecha) = '$anio'
-							GROUP BY DAY   (fecha)
-							ORDER BY precio DESC
-							LIMIT    1");
+        $this->db->query("SELECT   c.codigo_venta , c.cantidad * p.precio_venta AS precio , c.fecha 
+                            FROM     codigo_venta c
+                            LEFT JOIN productos p ON p.codigo_producto = c.codigo_producto
+                            WHERE    MONTH (fecha) = '$mes'
+                            AND      YEAR  (fecha) = '$anio'
+                            GROUP BY DAY   (fecha)
+                            ORDER BY precio DESC
+                            LIMIT 1");
 
         return $this->db->fetch();
     }
@@ -112,13 +116,14 @@ class Venta extends model
         if (strlen($anio) != 4)  throw new ValidacionException5('error 6');
         if (!is_numeric($anio))  throw new ValidacionException5('error 7');
 
-        $this->db->query("SELECT   codigo_venta , SUM(cantidad) precio , fecha 
-							FROM     codigo_venta
-							WHERE    MONTH (fecha) = '$mes'
-							AND      YEAR  (fecha) = '$anio'
-							GROUP BY DAY   (fecha)
-							ORDER BY precio ASC
-							LIMIT    1");
+        $this->db->query("SELECT   c.codigo_venta , c.cantidad * p.precio_venta AS precio , c.fecha 
+                            FROM     codigo_venta c
+                            LEFT JOIN productos p ON p.codigo_producto = c.codigo_producto
+                            WHERE    MONTH (fecha) = '$mes'
+                            AND      YEAR  (fecha) = '$anio'
+                            GROUP BY DAY   (fecha)
+                            ORDER BY precio ASC
+                            LIMIT 1");
 
         return $this->db->fetch();
     }
@@ -138,8 +143,9 @@ class Venta extends model
         if (strlen($anio) != 4)  throw new ValidacionException5('error 6');
         if (!is_numeric($anio))  throw new ValidacionException5('error 7');
 
-        $this->db->query("SELECT ROUND ( AVG(cantidad) ) AS Promedio
-							FROM   codigo_venta
+        $this->db->query("SELECT ROUND ( AVG(c.cantidad * p.precio_venta) ) AS promedio
+							FROM   codigo_venta c
+                            LEFT JOIN productos p ON p.codigo_producto = c.codigo_producto
 							WHERE  MONTH (fecha) = '$mes' 
 							AND    YEAR  (fecha) = '$anio'");
 
@@ -159,7 +165,7 @@ class Venta extends model
 
     public function añoSeleccionado($anio)
     {
-        if ($anio < 2019)  throw new ValidacionException5('error 1');
+        if ($anio < 2021)  throw new ValidacionException5('error 1');
         if (strlen($anio) != 4)  throw new ValidacionException5('error 2');
         if (!is_numeric($anio))  throw new ValidacionException5('error 3');
 
@@ -171,12 +177,13 @@ class Venta extends model
     {
 
         /*  VALIDACION DEL AÑO  */
-        if ($anio < 2019)  throw new ValidacionException5('error 1');
+        if ($anio < 2021)  throw new ValidacionException5('error 1');
         if (strlen($anio) != 4)  throw new ValidacionException5('error 2');
         if (!is_numeric($anio))  throw new ValidacionException5('error 3');
 
-        $this->db->query("SELECT SUM(cantidad) AS precio
-							FROM  codigo_venta
+        $this->db->query("SELECT SUM(c.cantidad * p.precio_venta) AS precio
+							FROM  codigo_venta c
+                            LEFT JOIN productos p ON p.codigo_producto = c.codigo_producto
 							WHERE YEAR(fecha) = '$anio'");
 
         return $this->db->fetch();
@@ -187,12 +194,13 @@ class Venta extends model
     {
 
         /*  VALIDACION DEL AÑO  */
-        if ($anio < 2019)  throw new ValidacionException5('error 1');
+        if ($anio < 2021)  throw new ValidacionException5('error 1');
         if (strlen($anio) != 4)  throw new ValidacionException5('error 2');
         if (!is_numeric($anio))  throw new ValidacionException5('error 3');
 
-        $this->db->query("SELECT   MONTH (v.fecha) AS mes , m.nombre , SUM(v.cantidad) AS total
+        $this->db->query("SELECT   MONTH (v.fecha) AS mes , m.nombre , SUM(v.cantidad * p.precio_venta) AS total
 							FROM     codigo_venta v , meses m
+                            LEFT JOIN productos p ON p.codigo_producto = v.codigo_producto
 							WHERE    MONTH (v.fecha) = m.numero
 							AND      YEAR  (v.fecha) = '$anio'
 							GROUP BY mes
@@ -207,12 +215,13 @@ class Venta extends model
     {
 
         /*  VALIDACION DEL AÑO  */
-        if ($anio < 2019)  throw new ValidacionException5('error 1');
+        if ($anio < 2021)  throw new ValidacionException5('error 1');
         if (strlen($anio) != 4)  throw new ValidacionException5('error 2');
         if (!is_numeric($anio))  throw new ValidacionException5('error 3');
 
-        $this->db->query("SELECT   MONTH (v.fecha) AS mes , m.nombre , SUM(v.cantidad) AS total
+        $this->db->query("SELECT   MONTH (v.fecha) AS mes , m.nombre , SUM(v.cantidad * p.precio_venta) AS total
 							FROM     codigo_venta v , meses m
+                            LEFT JOIN productos p ON p.codigo_producto = v.codigo_producto
 							WHERE    MONTH (v.fecha) = m.numero
 							AND      YEAR  (v.fecha) = '$anio'
 							GROUP BY mes
@@ -226,8 +235,9 @@ class Venta extends model
     public function VentaRecord($anio)
     {
 
-        $this->db->query("SELECT v.fecha , SUM(v.cantidad) precio , DATE_FORMAT(v.fecha,'%d') fechaRecord , m.nombre mes
+        $this->db->query("SELECT v.fecha , SUM(v.cantidad * p.precio_venta) precio , DATE_FORMAT(v.fecha,'%d') fechaRecord , m.nombre mes
 							FROM   codigo_venta v , meses m
+                            LEFT JOIN productos p ON p.codigo_producto = v.codigo_producto
 							WHERE  YEAR(v.fecha) = '$anio'
 							AND    MONTH (v.fecha) = m.numero
 							GROUP BY DAY(v.fecha) , MONTH(v.fecha)
@@ -247,12 +257,13 @@ class Venta extends model
         if (!is_numeric($mes)) die('ERROR4');
 
         /*  VALIDACION DEL AÑO  */
-        if ($anio < 2019) die('ERROR-1');
+        if ($anio < 2021) die('ERROR-1');
         if (strlen($anio) != 4) die('ERROR-2');
         if (!is_numeric($anio)) die('ERROR-3');
 
-        $this->db->query("SELECT   DAY(fecha) dia , SUM(cantidad) precio 
-                            FROM     codigo_venta
+        $this->db->query("SELECT   DAY(c.fecha) dia , SUM(c.cantidad * p.precio_venta) precio 
+                            FROM     codigo_venta c
+                            LEFT JOIN productos p ON p.codigo_producto = c.codigo_producto
                             WHERE    YEAR (fecha) = '$anio'
                             AND      MONTH(fecha) = '$mes'
                             GROUP BY dia
