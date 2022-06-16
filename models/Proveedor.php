@@ -100,7 +100,6 @@ class Proveedor extends model
 
     public function ExisteCuit($cuit)
     {
-
         if (!is_numeric($cuit)) throw new ValidacionException3('error 1');
         if (!ctype_digit($cuit))  throw new ValidacionException3('error 2');
              
@@ -110,7 +109,6 @@ class Proveedor extends model
 
         if ($this->db->numRows() != 1) return true;
         return false;
-
     }
 
     public function ExisteTelefonoProveedor($telefono)

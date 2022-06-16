@@ -22,31 +22,34 @@ if (isset($_POST['nuevo'])) {
     $b = $telefono->ExisteTelefono($_POST['telefono']);
 
 
-    if($a){
-        if($b){
-        $e->NuevoEmpleado(
-        $_POST['nombre'],
-        $_POST['apellido'],
-        $_POST['dni'],
-        $_POST['sueldo'],
-        $_POST['direccion'],
-        $_POST['altura'],
-        $_POST['telefono']);
-        header('location: ../controllers/Empleados.php');
+    if ($a) {
+        if ($b) {
+            $e->NuevoEmpleado(
+                $_POST['nombre'],
+                $_POST['apellido'],
+                $_POST['dni'],
+                $_POST['sueldo'],
+                $_POST['direccion'],
+                $_POST['altura'],
+                $_POST['telefono']
+            );
+            header('location: ../controllers/Empleados.php');
         } else {
-            echo '<script type="text/JavaScript"> 
-             alert("No se puede repetir el mismo TELEFONO para dos empleados distintos");
-             </script>';
-            $v = new listadoEmpleados();
-            $v->empleados = $e->getTodos();
-            }
-    }  else {
-    echo '<script type="text/JavaScript"> 
-     alert("No se puede repetir el mismo DNI para dos empleados distintos");
-     </script>';
-    $v = new listadoEmpleados();
-    $v->empleados = $e->getTodos();
+            header('location: ../html/alertaTelefonoRepetido.php');
+            // echo '<script type="text/JavaScript"> 
+            //  alert("No se puede repetir el mismo TELEFONO para dos empleados distintos");
+            //  </script>';
+            // $v = new listadoEmpleados();
+            // $v->empleados = $e->getTodos();
         }
+    } else {
+        // echo '<script type="text/JavaScript"> 
+        //      alert("No se puede repetir el mismo DNI para dos empleados distintos");
+        //      </script>';
+        // $v = new listadoEmpleados();
+        // $v->empleados = $e->getTodos();
+        header('location: ../html/alertaDniRepetido.php');
+    }
 } else {
     $v = new listadoEmpleados();
     $v->empleados = $e->getTodos();
