@@ -27,6 +27,6 @@ $e->promedioDia = $v->promedioDia($mes, $anio);
 $e->diaMax = $v->diaMax($mes, $anio);
 $e->diaMin = $v->diaMin($mes, $anio);
 $e->nombreMes = $m->nombreMes($mes);
-$e->lista = $v->ListaVentasDelMes($mes, $anio);
+
 
 $e->render();

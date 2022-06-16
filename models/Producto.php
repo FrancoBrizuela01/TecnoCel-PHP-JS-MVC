@@ -20,7 +20,7 @@ class Producto extends model
 
         if (!isset($desc)) throw new ValidacionException('error 1');
         if (strlen($desc) < 1) throw new ValidacionException('error 2');
-        if (strlen($desc) > 20) throw new ValidacionException('error 3');
+        if (strlen($desc) > 30) throw new ValidacionException('error 3');
         $desc = $this->db->escape($desc);
 
         if (!is_numeric($precio_costo)) throw new ValidacionException1('error 4');

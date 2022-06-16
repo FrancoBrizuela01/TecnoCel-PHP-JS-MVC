@@ -199,7 +199,7 @@ class Venta extends model
         if (!is_numeric($anio))  throw new ValidacionException5('error 3');
 
         $this->db->query("SELECT   MONTH (v.fecha) AS mes , m.nombre , SUM(v.cantidad * p.precio_venta) AS total
-							FROM     codigo_venta v , meses m
+							FROM     meses m, codigo_venta v  
                             LEFT JOIN productos p ON p.codigo_producto = v.codigo_producto
 							WHERE    MONTH (v.fecha) = m.numero
 							AND      YEAR  (v.fecha) = '$anio'
@@ -220,7 +220,7 @@ class Venta extends model
         if (!is_numeric($anio))  throw new ValidacionException5('error 3');
 
         $this->db->query("SELECT   MONTH (v.fecha) AS mes , m.nombre , SUM(v.cantidad * p.precio_venta) AS total
-							FROM     codigo_venta v , meses m
+							FROM     meses m, codigo_venta v 
                             LEFT JOIN productos p ON p.codigo_producto = v.codigo_producto
 							WHERE    MONTH (v.fecha) = m.numero
 							AND      YEAR  (v.fecha) = '$anio'
@@ -232,45 +232,6 @@ class Venta extends model
     }
 
 
-    public function VentaRecord($anio)
-    {
-
-        $this->db->query("SELECT v.fecha , SUM(v.cantidad * p.precio_venta) precio , DATE_FORMAT(v.fecha,'%d') fechaRecord , m.nombre mes
-							FROM   codigo_venta v , meses m
-                            LEFT JOIN productos p ON p.codigo_producto = v.codigo_producto
-							WHERE  YEAR(v.fecha) = '$anio'
-							AND    MONTH (v.fecha) = m.numero
-							GROUP BY DAY(v.fecha) , MONTH(v.fecha)
-							ORDER BY v.cantidad DESC
-							LIMIT 1");
-
-        return $this->db->fetch();
-    }
-
-    public function ListaVentasDelMes($mes, $anio)
-    {
-
-        /*  VALIDACION DEL MES  */
-        if ($mes <= 0) die('ERROR1');
-        if ($mes > 12) die('ERROR2');
-        if (strlen($mes) < 1 || strlen($mes) > 2) die('ERROR3');
-        if (!is_numeric($mes)) die('ERROR4');
-
-        /*  VALIDACION DEL AÑO  */
-        if ($anio < 2021) die('ERROR-1');
-        if (strlen($anio) != 4) die('ERROR-2');
-        if (!is_numeric($anio)) die('ERROR-3');
-
-        $this->db->query("SELECT   DAY(c.fecha) dia , SUM(c.cantidad * p.precio_venta) precio 
-                            FROM     codigo_venta c
-                            LEFT JOIN productos p ON p.codigo_producto = c.codigo_producto
-                            WHERE    YEAR (fecha) = '$anio'
-                            AND      MONTH(fecha) = '$mes'
-                            GROUP BY dia
-                            ORDER BY fecha ASC");
-
-        return $this->db->fetchAll();
-    }
 }
 
 class ValidacionException5 extends Exception
