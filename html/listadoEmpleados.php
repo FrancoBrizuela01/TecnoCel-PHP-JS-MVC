@@ -44,13 +44,10 @@
                             <button class="btn-eliminar" onclick="btnEliminarEmpleado(<?= $e['codigo_empleado'] ?>)">ELIMINAR</button>
                             <button class="btn-modificar" onclick="btnModificarEmpleado(<?= $e['codigo_empleado'] ?>, '<?= $e['nombre'] ?>', '<?= $e['apellido'] ?>', <?= $e['dni'] ?>, <?= $e['sueldo'] ?>, '<?= $e['direccion'] ?>', <?= $e['altura'] ?>, <?= $e['telefono'] ?>)">MODIFICAR</button>
                         </div>
-
-
                     </td>
                 <?php } ?>
                 </tr>
             </table>
-
         </div>
 
         <div class="mod-empleados" id="new-empleado">

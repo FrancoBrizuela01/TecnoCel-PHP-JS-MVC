@@ -339,6 +339,89 @@ function btnCancelarModificacionProducto() {
   window.location = utlProveedor;
 }
 
+// ADELANTOS
+function btnEliminarAdelanto(id) {
+  const urlEliminarAdelanto = "../controllers/EliminarAdelanto.php?id=";
+  Swal.fire({
+    title: "¿Desea eliminar el adelanto?",
+    text: "¡No podrás revertir esto!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si, eliminar!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Eliminado!",
+        text: "",
+        icon: "success",
+        showConfirmButton: false,
+      });
+      setTimeout(() => {
+        window.location = urlEliminarAdelanto + id;
+      }, "1300");
+    }
+  });
+}
+
+//ALERTA DNI CUIT O TELEFONO REPETIDO
+function alertaDniRepetido() {
+  const urlListaEmpleados = "../controllers/Empleados.php";
+  Swal.fire({
+    title: "ERROR!",
+    text: "El dni ingresado ya existe!",
+    icon: "error",
+    showCancelButton: false,
+    showConfirmButton: false,
+  });
+  setTimeout(() => {
+    window.location = urlListaEmpleados;
+  }, "2000");
+}
+
+function alertaTelefonoRepetido() {
+  const urlListaEmpleados = "../controllers/Empleados.php";
+  Swal.fire({
+    title: "ERROR!",
+    text: "El telefono ingresado ya existe!",
+    icon: "error",
+    showCancelButton: false,
+    showConfirmButton: false,
+  });
+  setTimeout(() => {
+    window.location = urlListaEmpleados;
+  }, "2000");
+}
+
+function alertaTelefonoRepetidoProveedor() {
+  const urlProveedor = "../controllers/Proveedor.php";
+  Swal.fire({
+    title: "ERROR!",
+    text: "El telefono ingresado ya existe!",
+    icon: "error",
+    showCancelButton: false,
+    showConfirmButton: false,
+  });
+  setTimeout(() => {
+    window.location = urlProveedor;
+  }, "2000");
+}
+
+function alertaCuitRepetido() {
+  const urlProveedor = "../controllers/Proveedor.php";
+  Swal.fire({
+    title: "ERROR!",
+    text: "El cuit ingresado ya existe!",
+    icon: "error",
+    showCancelButton: false,
+    showConfirmButton: false,
+  });
+  setTimeout(() => {
+    window.location = urlProveedor;
+  }, "2000");
+}
+
 //---------------------
 
 menuBtn.onclick = () => {
