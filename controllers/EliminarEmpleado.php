@@ -8,7 +8,7 @@ require '../models/Adelantos.php';
 require '../html/partials/session.php';
 
 $e = new Empleado();
-$a = new Adelantos();
+$a = new AdelantosModel();
 
 if (!empty($_GET['id'])) {
 

@@ -19,7 +19,7 @@
             <h2>LISTA DE PROVEEDORES:</h2>
             <table>
                 <tr>
-                    <th>Nombre Empresa</th>
+                    <th>Nombre</th>
                     <th>Razón Social</th>
                     <th>Cuit</th>
                     <th>Dirección</th>
@@ -51,7 +51,7 @@
             <form method="post">
                 <table>
                     <tr>
-                        <th>Nombre Empresa</th>
+                        <th>Nombre</th>
                         <th>Razón Social</th>
                         <th>Cuit</th>
                         <th>Dirección</th>
@@ -83,7 +83,7 @@
                 <input type=" text" name="id" id="mod-id-proveedor" value="" class="inputId">
                 <table>
                     <tr>
-                        <th>Nombre Empresa</th>
+                        <th>Nombre</th>
                         <th>Razón Social</th>
                         <th>Cuit</th>
                         <th>Dirección</th>

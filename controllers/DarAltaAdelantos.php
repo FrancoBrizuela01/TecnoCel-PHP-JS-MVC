@@ -8,7 +8,7 @@ require '../models/Adelantos.php';
 require '../views/altaadelanto.php';
 require '../html/partials/session.php';
 
-$a = new Adelantos();
+$a = new AdelantosModel();
 
 $empleado = $_POST["empleado"];
 $monto = $_POST["monto"];

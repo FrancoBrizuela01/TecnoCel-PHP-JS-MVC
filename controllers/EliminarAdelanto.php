@@ -6,7 +6,7 @@ require '../fw/fw.php';
 require '../models/Adelantos.php';
 require '../html/partials/session.php';
 
-$a = new Adelantos();
+$a = new AdelantosModel();
 
 if (!empty($_GET['id'])) {
 

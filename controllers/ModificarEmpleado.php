@@ -7,7 +7,6 @@ require '../models/Empleado.php';
 require '../views/listadoEmpleados.php';
 require '../html/partials/session.php';
 
-
 $e = new Empleado();
 
 $nombre = $_POST["nombre"];
@@ -29,3 +28,4 @@ $e->ModificarEmpleado(
     $telefono,
     $id
 );
+

@@ -29,7 +29,7 @@
                         <td>
                             <select name="empleado" id="empleado">
                                 <?php foreach ($this->empleados as $e) { ?>
-                                    <option value="<?= htmlentities($e['codigo_empleado']) ?>"> <?= htmlentities($e['nombre']) ?></option>
+                                    <option value="<?= htmlentities($e['codigo_empleado']) ?>"> <?= htmlentities($e['nombre']) ?> <?= htmlentities($e['apellido']) ?></option>
                                 <?php  } ?>
                             </select>
                         </td>

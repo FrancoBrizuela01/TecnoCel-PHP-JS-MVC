@@ -13,7 +13,7 @@ class Empleado extends model
 
     public function getListaAdelantos()
     {
-        $this->db->query("SELECT e.nombre, e.apellido, e.dni, a.fecha, a.cantidad
+        $this->db->query("SELECT e.nombre, e.apellido, e.dni, a.fecha, a.cantidad, a.codigo_adelanto, e.codigo_empleado
 							FROM adelantos a
 							LEFT JOIN empleados e ON a.codigo_empleado = e.codigo_empleado");
         return $this->db->fetchAll();
@@ -146,7 +146,6 @@ class Empleado extends model
 
         if ($this->db->numRows() != 1) return true;
         return false;
-
     }
 }
 

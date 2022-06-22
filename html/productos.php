@@ -14,7 +14,19 @@
     ?>
 
     <div class="Divcontainer" id="lista_empleados">
-        <a href="#new-empleado"><button class="btn-newEmpleado" id="btn-newEmpleado" onclick="mostrarAgregarEmpleado()">AGREGAR PRODUCTO</button></a>
+        <div class="my-buttons" id="my-buttons"> <a href="#new-empleado"><button class="btn-newEmpleado" id="btn-newEmpleado" onclick="mostrarAgregarEmpleado()">AGREGAR PRODUCTO</button></a>
+            <button class="btn-newEmpleado" id="btn-newEmpleado" onclick="mostrarInputPorcentaje()">INGRESAR PORCENTAJE</button>
+        </div>
+
+        <div id="contenedorPorcentaje">
+            <form id="formularioPorcentaje">
+                <h2>Ingresar porcentaje:</h2>
+                <input type="text" name="porcentaje" class="inputPorcentaje">
+                <input type="submit" value="Ingresar" class="btn-modificar" onclick="enviarPorcentaje()">
+                <button class="btn-eliminar" onclick="cancelarPorcentaje()">Cancelar</button>
+            </form>
+        </div>
+
         <h2>LISTA DE PRODUCTOS:</h2>
         <table>
             <tr>
