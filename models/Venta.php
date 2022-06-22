@@ -41,11 +41,11 @@ class Venta extends model
 
         $fecha = "$anio-$mes-$dia";
 
-        if (!is_numeric($cantidad)) throw new ValidacionException1('error 19');
-        if (!ctype_digit($cantidad))  throw new ValidacionException1('error 20');
+        if (!is_numeric($cantidad)) throw new ValidacionException('error 19');
+        if (!ctype_digit($cantidad))  throw new ValidacionException('error 20');
 
-        if (!is_numeric($id)) throw new ValidacionException1('error 18');
-        if (!ctype_digit($id))  throw new ValidacionException1('error 19');
+        if (!is_numeric($id)) throw new ValidacionException('error 18');
+        if (!ctype_digit($id))  throw new ValidacionException('error 19');
 
         $this->db->query("UPDATE codigo_venta
 							set fecha = '$fecha',
@@ -56,8 +56,8 @@ class Venta extends model
 
     public function EliminarVenta($id)
     {
-        if (!is_numeric($id)) throw new ValidacionException1('error 1');
-        if (!ctype_digit($id))  throw new ValidacionException1('error 2');
+        if (!is_numeric($id)) throw new ValidacionException('error 1');
+        if (!ctype_digit($id))  throw new ValidacionException('error 2');
 
         $this->db->query("DELETE
 							FROM codigo_venta
@@ -242,8 +242,8 @@ class Venta extends model
         if (strlen($anio) != 4)  throw new ValidacionException5('error 2');
         if (!is_numeric($anio))  throw new ValidacionException5('error 3');
 
-        $this->db->query("SELECT   MONTH (v.fecha) AS mes , m.nombre , SUM(v.cantidad * p.precio_venta) AS total
-                            FROM     meses m, codigo_venta v
+        $this->db->query("SELECT  MONTH (v.fecha) AS mes , m.nombre , SUM(v.cantidad * p.precio_venta) AS total
+							FROM     meses m, codigo_venta v  
                             LEFT JOIN productos p ON p.codigo_producto = v.codigo_producto
                             WHERE    MONTH (v.fecha) = m.numero
                             AND      YEAR  (v.fecha) = '$anio'

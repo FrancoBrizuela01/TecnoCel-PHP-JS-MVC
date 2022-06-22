@@ -13,6 +13,8 @@ class Empleado extends model
 
     public function getListaAdelantos()
     {
+        // $this->db->query("SELECT e.nombre, e.apellido, e.dni, a.fecha, a.cantidad, e.codigo_empleado
+
         $this->db->query("SELECT e.nombre, e.apellido, e.dni, a.fecha, a.cantidad, a.codigo_adelanto, e.codigo_empleado
 							FROM adelantos a
 							LEFT JOIN empleados e ON a.codigo_empleado = e.codigo_empleado");
