@@ -2,7 +2,7 @@
 
 // models/Adelantos.php
 
-class Adelantos extends model
+class AdelantosModel extends model
 {
     public function crearAdelantoFechaDeterminada($empleadoid, $monto, $fecha)
     {
@@ -44,24 +44,11 @@ class Adelantos extends model
 
         $this->db->query("DELETE
 							FROM adelantos
-							WHERE codigo_empleado = $id ");
+							WHERE codigo_adelanto = $id ");
     }
 
-    public function ModificarAdelanto($nombre, $apellido, $dni, $fecha, $cantidad, $id)
+    public function ModificarAdelanto($id, $id_empleado, $fecha, $cantidad)
     {
-        if (!isset($nombre)) throw new ValidacionException1('error 1');
-        if (strlen($nombre) < 1) throw new ValidacionException1('error 2');
-        if (strlen($nombre) > 20) throw new ValidacionException1('error 3');
-        $nombre = $this->db->escape($nombre);
-
-        if (!isset($apellido)) throw new ValidacionException1('error 4');
-        if (strlen($apellido) < 1) throw new ValidacionException1('error 5');
-        if (strlen($apellido) > 20) throw new ValidacionException1('error 6');
-        $apellido = $this->db->escape($apellido);
-
-        if (!is_numeric($dni)) throw new ValidacionException1('error 7');
-        if (!ctype_digit($dni))  throw new ValidacionException1('error 8');
-
         $anio = substr($fecha, 0, 4); //yyyy-mm-dd
         $mes = substr($fecha, 5, 2);
         $dia = substr($fecha, 8, 2);
@@ -80,6 +67,8 @@ class Adelantos extends model
 
         if (!checkdate($mes, $dia, $anio)) throw new ValidacionException('error 18');
 
+        $fecha = "$anio-$mes-$dia";
+
         if (!is_numeric($cantidad)) throw new ValidacionException1('error 19');
         if (!ctype_digit($cantidad))  throw new ValidacionException1('error 20');
 
@@ -87,12 +76,23 @@ class Adelantos extends model
         if (!ctype_digit($id))  throw new ValidacionException1('error 22');
 
         $this->db->query("UPDATE adelantos
-                            set nombre = '$nombre',
-                                apellido = '$apellido',
-                                dni     = $dni,
-                                fecha = $fecha,
-                                cantidad = $cantidad,
-                                WHERE codigo_adelanto = $id ");
+                                        set fecha = '$fecha',
+                                              cantidad = $cantidad,
+                                              codigo_empleado = $id_empleado
+                                        WHERE codigo_adelanto = $id ");
+    }
+
+    public function existeId($id)
+    {
+        if (!ctype_digit($id)) return false;
+        if ($id < 1) return false;
+
+        $this->db->query("SELECT * FROM  adelantos
+							WHERE codigo_adelanto = $id");
+
+        if ($this->db->numRows() != 1) return false;
+
+        return true;
     }
 }
 

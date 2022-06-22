@@ -7,7 +7,6 @@ require '../models/Empleado.php';
 require '../views/adelantos.php';
 require '../html/partials/session.php';
 
-
 $a = new Empleado();
 $todos = $a->getListaAdelantos();
 

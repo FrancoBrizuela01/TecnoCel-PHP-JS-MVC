@@ -10,14 +10,58 @@ class Venta extends model
     public function GetVentas()
     {
 
-        $this->db->query("SELECT v.fecha, p.descripcion, v.cantidad, v.cantidad * p.precio_venta as total
+        $this->db->query("SELECT v.fecha, p.descripcion, v.cantidad, v.cantidad * p.precio_venta as total, v.codigo_venta, v.codigo_producto
                             FROM codigo_venta v 
                             LEFT JOIN productos p ON v.codigo_producto = p.codigo_producto
                             ORDER by v.codigo_venta desc
-                            LIMIT 10
                             ");
 
         return $this->db->fetchAll();
+    }
+
+    public function ModificarVenta($fecha, $cantidad, $codigo_producto, $id)
+    {
+        $anio = substr($fecha, 0, 4); //yyyy-mm-dd
+        $mes = substr($fecha, 5, 2);
+        $dia = substr($fecha, 8, 2);
+
+        if (!ctype_digit($dia)) throw new ValidacionException('error 9');
+        if ($dia < 1) throw new ValidacionException('error 10');
+        if ($dia > 31) throw new ValidacionException('error 11');
+
+        if (!ctype_digit($mes)) throw new ValidacionException('error 12');
+        if ($mes < 1) throw new ValidacionException('error 13');
+        if ($mes > 12) throw new ValidacionException('error 14');
+
+        if (!ctype_digit($anio)) throw new ValidacionException('error 15');
+        if ($anio < date('Y') - 1) throw new ValidacionException('error 16');
+        if ($anio > date('Y')) throw new ValidacionException('error 17');
+
+        if (!checkdate($mes, $dia, $anio)) throw new ValidacionException('error 18');
+
+        $fecha = "$anio-$mes-$dia";
+
+        if (!is_numeric($cantidad)) throw new ValidacionException1('error 19');
+        if (!ctype_digit($cantidad))  throw new ValidacionException1('error 20');
+
+        if (!is_numeric($id)) throw new ValidacionException1('error 18');
+        if (!ctype_digit($id))  throw new ValidacionException1('error 19');
+
+        $this->db->query("UPDATE codigo_venta
+							set fecha = '$fecha',
+								cantidad = $cantidad,
+                                codigo_producto = $codigo_producto
+							WHERE codigo_venta = $id ");
+    }
+
+    public function EliminarVenta($id)
+    {
+        if (!is_numeric($id)) throw new ValidacionException1('error 1');
+        if (!ctype_digit($id))  throw new ValidacionException1('error 2');
+
+        $this->db->query("DELETE
+							FROM codigo_venta
+							WHERE codigo_venta = $id ");
     }
 
     public function AgregarVenta($fecha, $cantidad, $codigo)

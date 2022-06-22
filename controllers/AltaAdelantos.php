@@ -11,7 +11,7 @@ require '../html/partials/session.php';
 $e = new Empleado();
 
 $v = new altaadelanto();    // este llama a la vista de alta de adelantos.
-$v->empleados = $e->getTodos();
+$v->empleados = $e->getListaAdelantos();
 
 
 $v->render();

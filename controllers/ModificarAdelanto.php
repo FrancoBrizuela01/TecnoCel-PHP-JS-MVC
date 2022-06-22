@@ -5,16 +5,20 @@
 require '../fw/fw.php';
 require '../models/Adelantos.php';
 require '../views/adelantos.php';
+require '../views/altaadelanto.php';
 require '../html/partials/session.php';
 
+$a = new AdelantosModel();
 
-$e = new Adelanto();
-
-$nombre = $_POST["nombre"];
-$apellido = $_POST["apellido"];
-$dni = $_POST["dni"];
+$id = $_POST["id_adelanto"];
+$id_empleado = $_POST["id_empleado"];
 $fecha = $_POST["fecha"];
 $cantidad = $_POST["cantidad"];
-$id = $_POST["id"];
 
-$e->ModificarAdelanto($nombre, $apellido, $dni, $fecha, $cantidad, $id);
+
+$a->ModificarAdelanto(
+    $id,
+    $id_empleado,
+    $fecha,
+    $cantidad
+);

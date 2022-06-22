@@ -2,6 +2,9 @@ const body = document.querySelector("body");
 const navbar = document.querySelector(".navbar");
 const menuBtn = document.querySelector(".menu-btn");
 const cancelBtn = document.querySelector(".cancel-btn");
+const btnNewEmpleado = document.getElementById("btn-newEmpleado");
+const DivAgregarEmpleado = document.getElementById("new-empleado");
+const DivModiProducto = document.getElementById("modificacion-producto");
 
 //FUNCIONES BOTONES
 
@@ -245,6 +248,95 @@ function btnCancelarModificacionProveedor() {
   window.location = utlProveedor;
 }
 
+//VENTAS
+function btnEliminarVenta(id) {
+  const urlEliminarVenta = "../controllers/EliminarVenta.php?id=";
+  Swal.fire({
+    title: "¿Desea eliminar el producto?",
+    text: "¡No podrás revertir esto!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si, eliminar!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Eliminado!",
+        text: "",
+        icon: "success",
+        showConfirmButton: false,
+      });
+      setTimeout(() => {
+        window.location = urlEliminarVenta + id;
+      }, "1300");
+    }
+  });
+}
+
+function btnModificarVenta(fecha, cantidad, codigo_venta, codigo_producto) {
+  const listaVentas = document.getElementById("product-list");
+  DivModiProducto.style.display = "block";
+  listaVentas.style.display = "none";
+
+  const lista_empleados = document.getElementById("lista_empleados");
+  lista_empleados.style.display = "none";
+
+  document.getElementById("id-venta").value = codigo_venta;
+  document.getElementById("mod_fecha_venta").value = fecha;
+  document.getElementById("codigo_producto").value = codigo_producto;
+  document.getElementById("mod_cantidad_venta").value = cantidad;
+
+  console.log(codigo_producto, codigo_venta, fecha, cantidad);
+}
+
+function btnGuardarModificacionVenta() {
+  const urlVentas = "../controllers/Ventas.php";
+  const formulario = document.getElementById("formulario_modificacionVenta");
+
+  formulario.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var datos = new FormData(formulario);
+
+    Swal.fire({
+      title: "¿Quieres guardar los cambios?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Guardar",
+      denyButtonText: `No guardar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Modificaciones hechas!",
+          icon: "success",
+          showConfirmButton: false,
+        });
+        fetch("../controllers/ModificarVenta.php", {
+          method: "post",
+          body: datos,
+        });
+        setTimeout(() => {
+          window.location = urlVentas;
+        }, "1300");
+      } else if (result.isDenied) {
+        Swal.fire({
+          title: "Los datos no se guardaran!",
+          icon: "info",
+          showConfirmButton: false,
+        });
+        setTimeout(() => {
+          window.location = urlVentas;
+        }, "1300");
+      }
+    });
+  });
+}
+
+function btnCancelarModificacionProducto() {
+  const utlProveedor = "../controllers/Productos.php";
+  window.location = utlProveedor;
+}
+
 //PRODUCTO
 
 function btnEliminarProducto(id) {
@@ -365,6 +457,70 @@ function btnEliminarAdelanto(id) {
   });
 }
 
+function btnModificarAdelanto(id, empleado, fecha, cantidad) {
+  DivModiProducto.style.display = "block";
+  btnNewEmpleado.style.display = "none";
+
+  const lista_empleados = document.getElementById("lista_empleados");
+  lista_empleados.style.display = "none";
+
+  document.getElementById("id-adelanto").value = id;
+  document.getElementById("empleado").value = empleado;
+  document.getElementById("mod-fecha").value = fecha;
+  document.getElementById("mod-cantidad").value = cantidad;
+}
+
+function btnGuardarModificacionAdelanto() {
+  const urlAdelantos = "../controllers/Adelantos.php";
+  const formulario = document.getElementById("formulario_modificacionAdelanto");
+
+  formulario.addEventListener("submit", function (e) {
+    e.preventDefault();
+    let datos = new FormData(formulario);
+
+    for (var value of datos.values()) {
+      console.log(value);
+    }
+    Swal.fire({
+      title: "¿Quieres guardar los cambios?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Guardar",
+      denyButtonText: `No guardar`,
+    }).then((result) => { 
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Modificaciones hechas!",
+          icon: "success",
+          showConfirmButton: false,
+        });
+        console.log(datos);
+        fetch("../controllers/ModificarAdelanto.php", {
+          method: "post",
+          body: datos,
+        });
+        setTimeout(() => {
+          window.location = urlAdelantos;
+        }, "1300");
+      } else if (result.isDenied) {
+        Swal.fire({
+          title: "Los datos no se guardaran!",
+          icon: "info",
+          showConfirmButton: false,
+        });
+        setTimeout(() => {
+          window.location = urlAdelantos;
+        }, "1300");
+      }
+    });
+  });
+}
+
+function btnCancelarModificacionAdelanto() {
+  const urlAdelantos = "../controllers/Adelantos.php";
+  window.location = urlAdelantos;
+}
+
 //ALERTA DNI CUIT O TELEFONO REPETIDO
 function alertaDniRepetido() {
   const urlListaEmpleados = "../controllers/Empleados.php";
@@ -424,6 +580,18 @@ function alertaCuitRepetido() {
 
 //---------------------
 
+function pedidoProveedor() {
+  const urlCompraInsumos = "../controllers/CompraInsumos.php";
+  Swal.fire({
+    title: "Pedido enviado!",
+    icon: "success",
+    showConfirmButton: false,
+  });
+  setTimeout(() => {
+    window.location = urlCompraInsumos;
+  }, "1500");
+}
+
 menuBtn.onclick = () => {
   navbar.classList.add("show");
   menuBtn.classList.add("hide");
@@ -440,11 +608,6 @@ window.onscroll = () => {
     : navbar.classList.remove("sticky");
 };
 
-const btnNewEmpleado = document.getElementById("btn-newEmpleado");
-const DivAgregarEmpleado = document.getElementById("new-empleado");
-
-const DivModiProducto = document.getElementById("modificacion-producto");
-
 function mostrarAgregarEmpleado() {
   DivAgregarEmpleado.style.display = "block";
   btnNewEmpleado.style.display = "none";
@@ -455,4 +618,61 @@ function agregarVenta() {
   document.getElementById("fecha").value = "";
   document.getElementById("cantidad").value = "";
   document.getElementById("total").value = "";
+}
+
+function mostrarInputPorcentaje() {
+  const input = document.getElementById("contenedorPorcentaje");
+  const contenedorButton = document.getElementById("my-buttons");
+  input.style.display = "block";
+  contenedorButton.style.display = "none";
+}
+
+function cancelarPorcentaje() {
+  const input = document.getElementById("contenedorPorcentaje");
+  const contenedorButton = document.getElementById("my-buttons");
+  input.style.display = "none";
+  contenedorButton.style.display = "block";
+}
+
+function enviarPorcentaje() {
+  const urlProductos = "../controllers/Productos.php";
+  const formulario = document.getElementById("formularioPorcentaje");
+
+  formulario.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var datos = new FormData(formulario);
+
+    Swal.fire({
+      title: "¿Quieres guardar los cambios?",
+      text: "Al ingresar el porcentaje cambiaras el precio de todos los productos!",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Guardar",
+      denyButtonText: `No guardar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Modificaciones hechas!",
+          icon: "success",
+          showConfirmButton: false,
+        });
+        fetch("../controllers/ModificacionProductoPorcentaje.php", {
+          method: "post",
+          body: datos,
+        });
+        setTimeout(() => {
+          window.location = urlProductos;
+        }, "1300");
+      } else if (result.isDenied) {
+        Swal.fire({
+          title: "Los datos no se guardaran!",
+          icon: "info",
+          showConfirmButton: false,
+        });
+        setTimeout(() => {
+          window.location = urlProductos;
+        }, "1300");
+      }
+    });
+  });
 }

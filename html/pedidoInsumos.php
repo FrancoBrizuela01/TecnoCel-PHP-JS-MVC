@@ -31,7 +31,7 @@
                         </select>
                     </td>
                     <td><input type="number" name="stock" id="stock"></td>
-                    <td id=""><button type="submit" class="btn-modificar">CONFIRMAR</button></td>
+                    <td id=""><button type="submit" class="btn-modificar" >CONFIRMAR</button></td>
                 </tr>
             </table>
         </form>
