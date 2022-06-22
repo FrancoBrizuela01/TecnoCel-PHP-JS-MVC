@@ -49,14 +49,14 @@ function btnGuardarModificacion() {
       denyButtonText: `No guardar`,
     }).then((result) => {
       if (result.isConfirmed) {
+        fetch("../controllers/ModificarEmpleado.php", {
+          method: "post",
+          body: datos,
+        });
         Swal.fire({
           title: "Modificaciones hechas!",
           icon: "success",
           showConfirmButton: false,
-        });
-        fetch("../controllers/ModificarEmpleado.php", {
-          method: "post",
-          body: datos,
         });
         setTimeout(() => {
           window.location = urlEmpleados;
@@ -332,6 +332,11 @@ function btnGuardarModificacionVenta() {
   });
 }
 
+function btnCancelarModificacionVenta() {
+  var urlVentas = "../controllers/Ventas.php";
+  window.location = urlVentas;
+}
+
 function btnCancelarModificacionProducto() {
   const utlProveedor = "../controllers/Productos.php";
   window.location = utlProveedor;
@@ -369,7 +374,8 @@ function btnModificarProducto(
   descripcion,
   precio_costo,
   precio_venta,
-  stock
+  stock,
+  proveedor
 ) {
   DivModiProducto.style.display = "block";
   btnNewEmpleado.style.display = "none";
@@ -377,6 +383,7 @@ function btnModificarProducto(
   const lista_empleados = document.getElementById("lista_empleados");
   lista_empleados.style.display = "none";
 
+  document.getElementById("proveedorSelect").value = proveedor;
   document.getElementById("id-producto").value = id;
   document.getElementById("descripcion-producto").value = descripcion;
   document.getElementById("precio_costo-producto").value = precio_costo;
@@ -487,7 +494,7 @@ function btnGuardarModificacionAdelanto() {
       showCancelButton: false,
       confirmButtonText: "Guardar",
       denyButtonText: `No guardar`,
-    }).then((result) => { 
+    }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
           title: "Modificaciones hechas!",
@@ -575,6 +582,20 @@ function alertaCuitRepetido() {
   });
   setTimeout(() => {
     window.location = urlProveedor;
+  }, "2000");
+}
+
+function alertaStockInsuficiente() {
+  const url = "../controllers/Ventas.php";
+  Swal.fire({
+    title: "ERROR!",
+    text: "El stock de este producto es insuficiente",
+    icon: "error",
+    showCancelButton: false,
+    showConfirmButton: false,
+  });
+  setTimeout(() => {
+    window.location = url;
   }, "2000");
 }
 
@@ -675,4 +696,14 @@ function enviarPorcentaje() {
       }
     });
   });
+}
+
+function btnEstadisticasAnio() {
+  var urlEstadisticaAnio = "../controllers/EstadisticaYear.php";
+  window.location = urlEstadisticaAnio;
+}
+
+function btnEstadisticasMes() {
+  var urlEstadisticaMes = "../controllers/EstadisticaMes.php";
+  window.location = urlEstadisticaMes;
 }

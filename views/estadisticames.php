@@ -41,4 +41,5 @@ class estadisticasMes extends view
                 break;
         }
     }
+    
 }

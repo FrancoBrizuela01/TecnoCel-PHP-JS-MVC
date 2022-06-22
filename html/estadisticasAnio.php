@@ -17,6 +17,7 @@
     ?>
 
     <div class="Divcontainer" id="Divcontainer">
+        <button class="btn-search btnEstadisticaAnio" onclick="btnEstadisticasMes()">ESTADISTICAS MES</button>
         <h2 class="h2Initial">ESTADISTICAS DEL AÑO:</h2>
 
         <form action="" method="post">
@@ -37,7 +38,6 @@
                     <th>TOTAL</th>
                     <th>MES MENOS VENDIDO</th>
                     <th>MES MÁS VENDIDO</th>
-                    <th>VENTA RECORD</th>
                 </tr>
                 <tr>
                     <td>-</td>
@@ -45,9 +45,6 @@
                     <td>-</td>
 
                     <td>-</td>
-
-                    <td>-</td>
-
                 </tr>
             </table>
         <?php endif ?>
@@ -59,7 +56,6 @@
                     <th>TOTAL</th>
                     <th>MES MENOS VENDIDO</th>
                     <th>MES MÁS VENDIDO</th>
-                    <th>VENTA RECORD</th>
                 </tr>
                 <tr>
                     <td>$<?= htmlentities($this->totalAño['precio']) ?></td>
@@ -67,8 +63,6 @@
                     <td><?= htmlentities($this->mesMin['nombre']) ?> $<?= htmlentities($this->mesMin['total']) ?></td>
 
                     <td><?= htmlentities($this->mesMax['nombre']) ?> $<?= htmlentities($this->mesMax['total']) ?></td>
-
-                    <td><?= htmlentities($this->NombreDia($this->record['fecha'])) ?> <?= htmlentities($this->record['fechaRecord']) ?> <?= htmlentities($this->record['mes']) ?> $<?= htmlentities($this->record['precio']) ?></td>
 
                 </tr>
             </table>

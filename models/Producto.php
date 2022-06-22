@@ -8,19 +8,21 @@ class Producto extends model
     public function getTodosProdu()
     {
 
-        $this->db->query("SELECT * 
-							FROM productos");
+        $this->db->query("SELECT p.descripcion, p.codigo_producto, p.precio_venta, p.precio_costo, p.stock, p.codigo_proveedor, pr.razon_social
+							FROM productos p
+                            LEFT JOIN proveedor pr on pr.codigo_proveedor = p.codigo_proveedor
+                            ");
 
         return $this->db->fetchAll();
     }
 
 
-    public function NuevoProducto($desc, $precio_costo, $precio_venta, $stock)
+    public function NuevoProducto($desc, $precio_costo, $precio_venta, $stock, $proveedor)
     {
 
         if (!isset($desc)) throw new ValidacionException('error 1');
         if (strlen($desc) < 1) throw new ValidacionException('error 2');
-        if (strlen($desc) > 20) throw new ValidacionException('error 3');
+        if (strlen($desc) > 40) throw new ValidacionException('error 3');
         $desc = $this->db->escape($desc);
 
         if (!is_numeric($precio_costo)) throw new ValidacionException1('error 4');
@@ -33,8 +35,8 @@ class Producto extends model
         if (!ctype_digit($stock))  throw new ValidacionException1('error 9');
 
         $this->db->query("INSERT INTO productos
-								(descripcion, precio_costo, precio_venta, stock) VALUES
-								('$desc', $precio_costo, '$precio_venta', $stock )");
+								(descripcion, precio_costo, precio_venta, stock, codigo_proveedor) VALUES
+								('$desc', $precio_costo, '$precio_venta', $stock, $proveedor )");
     }
 
     public function EliminarProducto($id)
@@ -48,7 +50,7 @@ class Producto extends model
 								WHERE codigo_producto = $id ");
     }
 
-    public function ModificarProducto($descripcion, $precio_costo, $precio_venta, $stock, $id)
+    public function ModificarProducto($descripcion, $precio_costo, $precio_venta, $stock, $id, $proveedor)
     {
         if (!is_numeric($precio_costo)) throw new ValidacionException1('error 1');
         if (!ctype_digit($precio_costo))  throw new ValidacionException1('error 2');
@@ -64,7 +66,8 @@ class Producto extends model
 								set	descripcion = '$descripcion',
                                       precio_costo = $precio_costo,
 									  precio_venta = $precio_venta,
-                                      stock = $stock
+                                      stock = $stock,
+                                      codigo_proveedor = $proveedor
 								WHERE codigo_producto = $id");
     }
 
@@ -117,24 +120,25 @@ class Producto extends model
 
     public function getCompras()
     {
-        $this->db->query("SELECT p.descripcion, c.cantidad, c.cantidad * p.precio_costo as total
-                            FROM compra_producto c
-                            LEFT JOIN productos p ON p.codigo_producto = c.codigo_producto
+        $this->db->query("SELECT p.descripcion, c.cantidad, pro.razon_social ,c.cantidad * p.precio_costo as total
+                            FROM proveedor pro, compra_producto c, productos p
+                            WHERE pro.codigo_proveedor = p.codigo_proveedor and
+                            p.codigo_producto = c.codigo_producto
                             ORDER BY codigo_compra desc
                             LIMIT 10 ");
         return $this->db->fetchAll();
     }
 
-    public function CambiarPrecioVenta ( $porciento ) 
+    public function CambiarPrecioVenta($porciento)
     {
 
-        $this->db->query ( "UPDATE productos
+        $this->db->query("UPDATE productos
                             SET    precio_venta = precio_venta + ( precio_venta * '$porciento' / 100 )");
     }
-    public function CambiarPrecioCosto ( $porciento ) 
+    public function CambiarPrecioCosto($porciento)
     {
 
-        $this->db->query ( "UPDATE productos
+        $this->db->query("UPDATE productos
                             SET    precio_costo = precio_costo + ( precio_costo * '$porciento' / 100 )");
     }
 }

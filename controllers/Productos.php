@@ -16,7 +16,7 @@ if (isset($_POST['cancelar'])) {
 }
 
 if (isset($_POST['nuevo'])) {
-    $p->NuevoProducto($_POST['desc'], $_POST['precio_costo'], $_POST['precio_venta'], $_POST['stock']);
+    $p->NuevoProducto($_POST['desc'], $_POST['precio_costo'], $_POST['precio_venta'], $_POST['stock'], $_POST['id_proveedor']);
 
     header('location: ../controllers/Productos.php');
 } else {

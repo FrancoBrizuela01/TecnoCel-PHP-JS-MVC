@@ -12,14 +12,9 @@
             <li><a href="../controllers/Adelantos.php">Adelantos</a></li>
             <li><a href="../controllers/Proveedor.php">Proveedor</a></li>
             <li><a href="../controllers/Productos.php">Productos</a></li>
-            <li><a href="../controllers/CompraInsumos.php">Pedidos a Proveedor</a></li>
+            <li><a href="../controllers/CompraInsumos.php">Compra de productos</a></li>
             <li><a href="../controllers/Ventas.php">Registrar ventas</a></li>
-            <li><a>Estadísticas</a>
-                <ul>
-                    <li><a href="../controllers/EstadisticaMes.php">Estadísticas mes</a></li>
-                    <li><a href="../controllers/EstadisticaYear.php">Estadísticas año</a></li>
-                </ul>
-            </li>
+            <li><a href="../controllers/EstadisticaMes.php">Estadísticas</a></li>
         </ul>
         <div class="icon menu-btn">
             <i class="fas fa-bars"></i>

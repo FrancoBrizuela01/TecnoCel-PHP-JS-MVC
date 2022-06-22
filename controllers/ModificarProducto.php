@@ -13,11 +13,13 @@ $precio_costo = $_POST["precio_costo"];
 $precio_venta = $_POST["precio_venta"];
 $stock = $_POST["stock"];
 $id = $_POST["id"];
+$proveedor = $_POST["id_proveedor"];
 
 $p->ModificarProducto(
     $descripcion,
     $precio_costo,
     $precio_venta,
     $stock,
-    $id
+    $id,
+    $proveedor
 );

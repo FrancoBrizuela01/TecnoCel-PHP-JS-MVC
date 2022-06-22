@@ -14,7 +14,7 @@
     ?>
 
     <div class="Divcontainer" id="Divcontainer">
-        <h2>PEDIDOS A PROVEEDOR</h2>
+        <h2>COMPRA DE PRODUCTOS</h2>
         <form method="post">
             <table>
                 <tr>
@@ -26,12 +26,12 @@
                     <td>
                         <select id="codigo" name="codigo">
                             <?php foreach ($this->insumos as $a) {  ?>
-                                <option value="<?= htmlentities($a['codigo_producto']) ?>"><?= htmlentities($a['descripcion']) ?></option>
+                                <option value="<?= htmlentities($a['codigo_producto']) ?>"><?= htmlentities($a['descripcion']) ?> (<?= htmlentities($a['razon_social']) ?>)</option>
                             <?php } ?>
                         </select>
                     </td>
                     <td><input type="number" name="stock" id="stock"></td>
-                    <td id=""><button type="submit" class="btn-modificar" >CONFIRMAR</button></td>
+                    <td id=""><button type="submit" class="btn-modificar">CONFIRMAR</button></td>
                 </tr>
             </table>
         </form>
@@ -42,12 +42,14 @@
             <tr>
                 <th>DESCRIPCION</th>
                 <th>CANTIDAD</th>
+                <th>PROVEEDOR</th>
                 <th>TOTAL</th>
             </tr>
             <?php foreach ($this->compras as $c) { ?>
                 <tr>
                     <td><?= htmlentities($c['descripcion']) ?></td>
                     <td><?= htmlentities($c['cantidad']) ?></td>
+                    <td><?= htmlentities($c['razon_social']) ?></td>
                     <td><?= htmlentities($c['total']) ?></td>
                 </tr>
             <?php } ?>

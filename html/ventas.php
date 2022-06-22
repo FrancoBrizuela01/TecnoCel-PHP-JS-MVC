@@ -28,7 +28,7 @@
                         <td>
                             <select id="codigo" name="codigo">
                                 <?php foreach ($this->productos as $p) {  ?>
-                                    <option value="<?= $p['codigo_producto'] ?>"><?= $p['descripcion'] ?></option>
+                                    <option value="<?= $p['codigo_producto'] ?>"><?= $p['descripcion'] ?> (<?= $p['razon_social'] ?>)</option>
                                 <?php } ?>
                             </select>
                         </td>
@@ -70,7 +70,7 @@
 
         <div class="mod-empleados" id="modificacion-producto">
             <h2>Modificar venta</h2>
-            <a href="#Divcontainer"><button name="Cancelar" value="Cancelar" class="btn-eliminar btn-cancelar-modificacion" id="btnCancelarModificar" onclick="btnCancelarModificacion()">CANCELAR</button></a>
+            <a href="#Divcontainer"><button name="Cancelar" value="Cancelar" class="btn-eliminar btn-cancelar-modificacion" id="btnCancelarModificar" onclick="btnCancelarModificacionVenta()">CANCELAR</button></a>
             <form id="formulario_modificacionVenta">
                 <input type="text" name="id" id="id-venta" value="" class="inputId">
                 <table>
