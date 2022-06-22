@@ -41,11 +41,11 @@ class Venta extends model
 
         $fecha = "$anio-$mes-$dia";
 
-        if (!is_numeric($cantidad)) throw new ValidacionException1('error 19');
-        if (!ctype_digit($cantidad))  throw new ValidacionException1('error 20');
+        if (!is_numeric($cantidad)) throw new ValidacionException('error 19');
+        if (!ctype_digit($cantidad))  throw new ValidacionException('error 20');
 
-        if (!is_numeric($id)) throw new ValidacionException1('error 18');
-        if (!ctype_digit($id))  throw new ValidacionException1('error 19');
+        if (!is_numeric($id)) throw new ValidacionException('error 18');
+        if (!ctype_digit($id))  throw new ValidacionException('error 19');
 
         $this->db->query("UPDATE codigo_venta
 							set fecha = '$fecha',
@@ -56,8 +56,8 @@ class Venta extends model
 
     public function EliminarVenta($id)
     {
-        if (!is_numeric($id)) throw new ValidacionException1('error 1');
-        if (!ctype_digit($id))  throw new ValidacionException1('error 2');
+        if (!is_numeric($id)) throw new ValidacionException('error 1');
+        if (!ctype_digit($id))  throw new ValidacionException('error 2');
 
         $this->db->query("DELETE
 							FROM codigo_venta
@@ -226,9 +226,9 @@ class Venta extends model
         if (!is_numeric($anio))  throw new ValidacionException5('error 3');
 
         $this->db->query("SELECT SUM(c.cantidad * p.precio_venta) AS precio
-							FROM  codigo_venta c
+                            FROM  codigo_venta c
                             LEFT JOIN productos p ON p.codigo_producto = c.codigo_producto
-							WHERE YEAR(fecha) = '$anio'");
+                            WHERE YEAR(fecha) = '$anio'");
 
         return $this->db->fetch();
     }
@@ -242,14 +242,14 @@ class Venta extends model
         if (strlen($anio) != 4)  throw new ValidacionException5('error 2');
         if (!is_numeric($anio))  throw new ValidacionException5('error 3');
 
-        $this->db->query("SELECT   MONTH (v.fecha) AS mes , m.nombre , SUM(v.cantidad * p.precio_venta) AS total
+        $this->db->query("SELECT  MONTH (v.fecha) AS mes , m.nombre , SUM(v.cantidad * p.precio_venta) AS total
 							FROM     meses m, codigo_venta v  
                             LEFT JOIN productos p ON p.codigo_producto = v.codigo_producto
-							WHERE    MONTH (v.fecha) = m.numero
-							AND      YEAR  (v.fecha) = '$anio'
-							GROUP BY mes
-							ORDER BY total ASC
-							LIMIT    1");
+                            WHERE    MONTH (v.fecha) = m.numero
+                            AND      YEAR  (v.fecha) = '$anio'
+                            GROUP BY mes
+                            ORDER BY total ASC
+                            LIMIT    1");
 
         return $this->db->fetch();
     }
@@ -258,24 +258,22 @@ class Venta extends model
     public function mesMax($anio)
     {
 
-        /*  VALIDACION DEL AÑO  */
+        /*  VALIDACION DEL AÑO */
         if ($anio < 2021)  throw new ValidacionException5('error 1');
         if (strlen($anio) != 4)  throw new ValidacionException5('error 2');
         if (!is_numeric($anio))  throw new ValidacionException5('error 3');
 
         $this->db->query("SELECT   MONTH (v.fecha) AS mes , m.nombre , SUM(v.cantidad * p.precio_venta) AS total
-							FROM     meses m, codigo_venta v 
+                            FROM     meses m, codigo_venta v 
                             LEFT JOIN productos p ON p.codigo_producto = v.codigo_producto
-							WHERE    MONTH (v.fecha) = m.numero
-							AND      YEAR  (v.fecha) = '$anio'
-							GROUP BY mes
-							ORDER BY total DESC
-							LIMIT    1");
+                            WHERE    MONTH (v.fecha) = m.numero
+                            AND      YEAR  (v.fecha) = '$anio'
+                            GROUP BY mes
+                            ORDER BY total DESC
+                            LIMIT    1");
 
         return $this->db->fetch();
     }
-
-
 }
 
 class ValidacionException5 extends Exception

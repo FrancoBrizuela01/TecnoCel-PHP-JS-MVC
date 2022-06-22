@@ -20,6 +20,8 @@ if (isset($_POST['nuevo'])) {
     $a = $cuit->ExisteCuit($_POST['cuit']);
     $b = $telefono->ExisteTelefonoProveedor($_POST['telefono']);
 
+    error_log($a);
+
     if ($a) {
         if ($b) {
             $p->NuevoProveedor(
@@ -35,11 +37,6 @@ if (isset($_POST['nuevo'])) {
             header('location: ../html/alertaTelefonoRepetidoProveedor.php');
         }
     } else {
-        // echo '<script type="text/JavaScript"> 
-        //      alert("No se puede repetir el mismo CUIT para dos proveedores distintos");
-        //      </script>';
-        // $v = new listaProveedor();
-        // $v->proveedores = $p->GetProve();
         header('location: ../html/alertaCuitRepetido.php');
     }
 } else {

@@ -36,18 +36,8 @@ if (isset($_POST['nuevo'])) {
             header('location: ../controllers/Empleados.php');
         } else {
             header('location: ../html/alertaTelefonoRepetido.php');
-            // echo '<script type="text/JavaScript"> 
-            //  alert("No se puede repetir el mismo TELEFONO para dos empleados distintos");
-            //  </script>';
-            // $v = new listadoEmpleados();
-            // $v->empleados = $e->getTodos();
         }
     } else {
-        // echo '<script type="text/JavaScript"> 
-        //      alert("No se puede repetir el mismo DNI para dos empleados distintos");
-        //      </script>';
-        // $v = new listadoEmpleados();
-        // $v->empleados = $e->getTodos();
         header('location: ../html/alertaDniRepetido.php');
     }
 } else {

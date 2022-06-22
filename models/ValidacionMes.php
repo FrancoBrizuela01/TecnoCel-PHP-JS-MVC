@@ -16,7 +16,7 @@ class meses extends model
 
         $this->db->query("SELECT *
 							FROM   meses
-							WHERE  numero = '$numMes'");
+							WHERE  numero = $numMes");
 
         return $this->db->fetch();
     }

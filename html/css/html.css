@@ -329,6 +329,11 @@ a:hover {
     margin-bottom: 10px;
 }
 
+.btnEstadisticaAnio {
+    width: 14% !important;
+    height: 57px !important;
+}
+
 .btn-search {
     outline: none;
     text-align: center;
@@ -511,6 +516,7 @@ a {
 
 .h2Initial {
     text-align: initial !important;
+    margin-top: 70px;
 }
 
 .nav li ul {
@@ -520,7 +526,7 @@ a {
 }
 
 .nav li:hover>ul {
-    display: inline-block;
+    display:contents;
 }
 
 .nav li ul li {

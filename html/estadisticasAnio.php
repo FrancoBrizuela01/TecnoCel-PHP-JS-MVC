@@ -17,6 +17,7 @@
     ?>
 
     <div class="Divcontainer" id="Divcontainer">
+        <button class="btn-search btnEstadisticaAnio" onclick="btnEstadisticasMes()">ESTADISTICAS MES</button>
         <h2 class="h2Initial">ESTADISTICAS DEL AÑO:</h2>
 
         <form action="" method="post">
@@ -44,9 +45,6 @@
                     <td>-</td>
 
                     <td>-</td>
-
-                    <td>-</td>
-
                 </tr>
             </table>
         <?php endif ?>

@@ -15,21 +15,18 @@ $can = new Producto();
 
 if (count($_POST) > 0) {
 
-	$a = $can->CantidadStock($_POST['codigo'], $_POST['cantidad']);
+    $a = $can->CantidadStock($_POST['codigo'], $_POST['cantidad']);
 
-	if($a){
-   		$ven->AgregarVenta($_POST['fecha'], $_POST['cantidad'], $_POST['codigo']);
-  	  	$p->VentaRealizada($_POST['codigo'], $_POST['cantidad']);
-  	    header('location: ../controllers/Ventas.php');
-	} else {
-    echo '<script type="text/JavaScript"> 
-     alert("xd");
-     </script>';
-    $v = new ventas();
-    $v->vendido = $ven->GetVentas();    //ACA SERIA QUE NO SE PUEDE COMPRAR PQ NO HAY STO
-    $v->productos = $p->getTodosProdu();
-}
-
+    if ($a) {
+        $ven->AgregarVenta($_POST['fecha'], $_POST['cantidad'], $_POST['codigo']);
+        $p->VentaRealizada($_POST['codigo'], $_POST['cantidad']);
+        header('location: ../controllers/Ventas.php');
+    } else {
+        header('location: ../html/alertaStockInsuficiente.php');
+        $v = new ventas();
+        $v->vendido = $ven->GetVentas();    //ACA SERIA QUE NO SE PUEDE COMPRAR PQ NO HAY STO
+        $v->productos = $p->getTodosProdu();
+    }
 } else {
     $v = new ventas();
     $v->vendido = $ven->GetVentas();

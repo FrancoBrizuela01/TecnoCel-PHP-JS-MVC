@@ -31,6 +31,7 @@
         <table>
             <tr>
                 <th>DESCRIPCIÓN</th>
+                <th>PROVEEDOR</th>
                 <th>PRECIO COSTO</th>
                 <th>PRECIO VENTA</th>
                 <th>STOCK</th>
@@ -39,16 +40,21 @@
             <?php foreach ($this->productos as $p) { ?>
                 <tr>
                     <td><?= htmlentities($p['descripcion']) ?></td>
-                    <td><?= htmlentities($p['precio_costo']) ?></td>
-                    <td><?= htmlentities($p['precio_venta']) ?></td>
-                    <td><?= htmlentities($p['stock']) ?></td>
-                    <td>
-                        <div class="btn-group">
-                            <button class="btn-eliminar" onclick="btnEliminarProducto(<?= $p['codigo_producto'] ?>)">ELIMINAR</button>
-                            <button class="btn-modificar" onclick="btnModificarProducto(<?= $p['codigo_producto'] ?>, '<?= $p['descripcion'] ?>',<?= $p['precio_costo'] ?>, <?= $p['precio_venta'] ?>,<?= $p['stock'] ?>)">MODIFICAR</button>
-                        </div>
-                    </td>
+                    <?php if ($p['razon_social'] == null) { ?>
+                    <td>proveedor inexistente</td>
+                <?php } else { ?>
+                    <td><?= htmlentities($p['razon_social']) ?></td>
                 <?php } ?>
+                <td><?= htmlentities($p['precio_costo']) ?></td>
+                <td><?= htmlentities($p['precio_venta']) ?></td>
+                <td><?= htmlentities($p['stock']) ?></td>
+                <td>
+                    <div class="btn-group">
+                        <button class="btn-eliminar" onclick="btnEliminarProducto(<?= $p['codigo_producto'] ?>)">ELIMINAR</button>
+                        <button class="btn-modificar" onclick="btnModificarProducto(<?= $p['codigo_producto'] ?>, '<?= $p['descripcion'] ?>',<?= $p['precio_costo'] ?>, <?= $p['precio_venta'] ?>,<?= $p['stock'] ?>, <?= $p['codigo_proveedor'] ?>)">MODIFICAR</button>
+                    </div>
+                </td>
+            <?php } ?>
                 </tr>
 
         </table>
@@ -61,6 +67,7 @@
         <form method="post">
             <table>
                 <tr>
+                    <th>PROVEEDOR</th>
                     <th>DESCRIPCIÓN</th>
                     <th>PRECIO COSTO</th>
                     <th>PRECIO VENTA</th>
@@ -68,6 +75,13 @@
                     <th>ACCIONES</th>
                 </tr>
                 <tr>
+                    <td>
+                        <select name="id_proveedor" id="proveedor">
+                            <?php foreach ($this->prove as $e) { ?>
+                                <option value="<?= $e['codigo_proveedor'] ?>"> <?= htmlentities($e['razon_social']) ?></option>
+                            <?php  } ?>
+                        </select>
+                    </td>
                     <td><input type="text" name="desc" id="desc"></td>
                     <td><input type="number" name="precio_costo" id="precio_costo" value=""></td>
                     <td><input type="number" name="precio_venta" id="precio_venta" value=""></td>
@@ -88,6 +102,7 @@
             <input type="text" name="id" id="id-producto" value="" class="inputId">
             <table>
                 <tr>
+                    <th>PROVEEDOR</th>
                     <th>DESCRIPCION</th>
                     <th>PRECIO COSTO</th>
                     <th>PRECIO VENTA</th>
@@ -95,6 +110,13 @@
                     <th>ACCIONES</th>
                 </tr>
                 <tr>
+                    <td>
+                        <select name="id_proveedor" id="proveedorSelect">
+                            <?php foreach ($this->prove as $e) { ?>
+                                <option value="<?= $e['codigo_proveedor'] ?>"> <?= htmlentities($e['razon_social']) ?> </option>
+                            <?php  } ?>
+                        </select>
+                    </td>
                     <td><input type="text" name="descripcion" id="descripcion-producto" value=""></td>
                     <td><input type="number" name="precio_costo" id="precio_costo-producto" value=""></td>
                     <td><input type="number" name="precio_venta" id="precio_venta-producto" value=""></td>

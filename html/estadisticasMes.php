@@ -17,8 +17,8 @@
     ?>
 
     <div class="Divcontainer" id="Divcontainer">
+        <button class="btn-search btnEstadisticaAnio" onclick="btnEstadisticasAnio()">ESTADISTICAS AÑO</button>
         <h2 class="h2Initial">ESTADISTICAS DEL MES</h2>
-
         <form action="" method="post">
             <div class="divSelect">
                 <select name="mes" class="select">
